@@ -8,7 +8,7 @@ import com.inno.ace.enums.CommonMsg;
  *
  */
 public class AlreadyMemberException extends RuntimeException {
-
+    
     /**
      * 
      */
