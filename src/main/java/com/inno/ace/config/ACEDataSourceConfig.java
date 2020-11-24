@@ -27,7 +27,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableTransactionManagement
-@MapperScan(basePackages = "com.inno.rws.model.dao.ace", sqlSessionFactoryRef = "aceSqlSessionFactory")
+@MapperScan(basePackages = "com.inno.ace.model.dao.ace", sqlSessionFactoryRef = "aceSqlSessionFactory")
 public class ACEDataSourceConfig extends HikariConfig {
     
     @Bean(name = "aceHikariDataSource")

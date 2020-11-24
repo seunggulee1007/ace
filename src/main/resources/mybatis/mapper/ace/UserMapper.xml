@@ -4,7 +4,7 @@
     @apiNote 사업자 휴폐업 관련 매퍼
     @author  es-seungglee
  -->
-<mapper namespace="com.inno.rws.model.dao.rws.UserDao">
+<mapper namespace="com.inno.rws.model.dao.ace.UserDao">
 
     <select id="selectUser" resultType="userVO">
         select

@@ -4,7 +4,7 @@
     @apiNote 사업자 휴폐업 관련 매퍼
     @author  es-seungglee
  -->
-<mapper namespace="com.inno.rws.model.dao.rws.CodeMasterDao">
+<mapper namespace="com.inno.rws.model.dao.ace.CodeMasterDao">
     
     <!-- 코드 마스터 조회 -->
     <select id="selectCodeMasterList" resultType="codeMasterVO" parameterType="pagingVO">

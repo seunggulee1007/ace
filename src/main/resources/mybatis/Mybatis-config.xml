@@ -6,7 +6,7 @@
     </settings>
 
     <typeAliases>
-        <package name="com.inno.rws.model.vo"/>
+        <package name="com.inno.ace.model.vo"/>
     </typeAliases>
     
 </configuration>
