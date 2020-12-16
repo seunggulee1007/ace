@@ -21,12 +21,6 @@ public class MenuController {
         return menuService.selectMenuList();
     }
 
-    @PostMapping("/syncMenu")
-    @ApiOperation(value="메뉴 등록", notes="메뉴 등록")
-    public ResultVO syncMenu(MenuVO menuVO) throws Exception {
-        return menuService.syncMenu(menuVO);
-    }
-
     @GetMapping("/{menuId}")
     public ResultVO selectMenu(@PathVariable int menuId){
         return menuService.selectMenu(menuId);
