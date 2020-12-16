@@ -11,7 +11,7 @@
              user_id    as userId,
              password,
              user_nm    as userNm,
-             u_id       as uId,
+             admin_yn   as adminYn,
              crt_dtm    as crtDtm
         from tb_user
         where 
@@ -22,11 +22,13 @@
         insert into tb_user(
             user_id,
             password,
-            user_nm
+            user_nm,
+            admin_yn
         )values (
             #{userId},
             #{password},
-            #{userNm}
+            #{userNm},
+            #{adminYn}
         ) 
     </insert>
     
@@ -34,14 +36,6 @@
         update tb_user
             set
                 password = #{chgPwd}
-            where
-                user_id = #{userId}
-    </update>
-    
-    <update id="updateUid" parameterType="userVO">
-        update tb_user
-            set
-                u_id = #{uId}
             where
                 user_id = #{userId}
     </update>

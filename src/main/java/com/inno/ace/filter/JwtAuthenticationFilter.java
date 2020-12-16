@@ -10,7 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JwtAuthenticationFilter extends GenericFilterBean {
     
@@ -27,6 +30,12 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
         if(token != null && jwtTokenProvider.validateToken(token)) {
             Authentication auth = jwtTokenProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(auth);;
+            String userId = jwtTokenProvider.getUserId(token);
+            List<String> authorities = new ArrayList<>();
+            authorities.add("ROLE_USER");
+            token = jwtTokenProvider.createToken(userId, authorities);
+            HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+            httpServletResponse.setHeader("ACCESS_TOKEN", token);
         }
         filterChain.doFilter(request, response);
     }

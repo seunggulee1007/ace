@@ -16,8 +16,8 @@ public class UserVO {
     private String chgPwd;
     @ApiModelProperty(value="이름")
     private String userNm;
-    @ApiModelProperty(value="firebase UID")
-    private String uId;
+    @ApiModelProperty(value="관리자 여부")
+    private String adminYn;
     @ApiModelProperty(value="등록일자")
     private String crtDtm;
     

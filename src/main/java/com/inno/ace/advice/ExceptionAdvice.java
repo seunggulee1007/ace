@@ -2,6 +2,7 @@ package com.inno.ace.advice;
 
 import com.inno.ace.advice.exception.*;
 import com.inno.ace.enums.CommonCode;
+import com.inno.ace.enums.CommonMsg;
 import com.inno.ace.model.vo.ResultVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -52,20 +53,20 @@ public class ExceptionAdvice {
                 .build();
         return resultVO;
     }
-    
+
     @ExceptionHandler(CAuthenticationEntryPointException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ResultVO CEmailSigninFailedException(CAuthenticationEntryPointException e, HttpServletRequest request) {
         ResultVO resultVO = ResultVO.builder()
                 .result(CommonCode.FAIL.getCode())
                 .resultMsg(e.getMessage())
-                .errMsg("해당 리소스에 접근하기 위한 권한이 없습니다.")
+                .errMsg(CommonMsg.EXPIRE_LOGIN.getMsg())
                 .build();
         return resultVO;
     }
     
     @ExceptionHandler(NoMemberException.class)
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     public ResultVO NoMemberException(NoMemberException e, HttpServletRequest request) {
         ResultVO resultVO = ResultVO.builder()
                 .result(CommonCode.FAIL.getCode())
@@ -77,7 +78,7 @@ public class ExceptionAdvice {
     }
     
     @ExceptionHandler(AlreadyMemberException.class)
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     public ResultVO AlreadyMemberException(AlreadyMemberException e, HttpServletRequest request) {
         ResultVO resultVO = ResultVO.builder()
                 .result(CommonCode.FAIL.getCode())
@@ -88,7 +89,7 @@ public class ExceptionAdvice {
     }
     
     @ExceptionHandler(FalseIDException.class)
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     public ResultVO FalseIDException(FalseIDException e, HttpServletRequest request) {
         ResultVO resultVO = ResultVO.builder()
                 .result(CommonCode.FAIL.getCode())

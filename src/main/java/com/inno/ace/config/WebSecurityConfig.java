@@ -55,6 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public CorsConfiguration setCorsConfig() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedMethods(Arrays.asList("GET","PUT","DELETE","POST"));
+        config.setExposedHeaders(Arrays.asList("Access-Control-Allow-Headers", "ACCESS_TOKEN"));
         return config;
         
     }

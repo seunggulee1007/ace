@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
         String token = jwtTokenProvider.createToken(user.getUserId(), authorities);
         Map<String, Object> map = new HashMap<>();
         userVO.setUserNm(user.getUserNm());
+        userVO.setAdminYn(user.getAdminYn());
         map.put("authToken", token);
         map.put("user", userVO);
         return ResultVO.builder().data(map).resultMsg(CommonMsg.SUCCESS_LOGIN.getMsg()).build();
