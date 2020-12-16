@@ -21,26 +21,15 @@ public class MenuController {
         return menuService.selectMenuList();
     }
 
-    @PostMapping
+    @PostMapping("/syncMenu")
     @ApiOperation(value="메뉴 등록", notes="메뉴 등록")
-    public ResultVO insertMenuList(List<MenuVO> menuList) {
-        return menuService.insertMenuList(menuList);
+    public ResultVO syncMenu(MenuVO menuVO) throws Exception {
+        return menuService.syncMenu(menuVO);
     }
 
     @GetMapping("/{menuId}")
     public ResultVO selectMenu(@PathVariable int menuId){
         return menuService.selectMenu(menuId);
-    }
-
-    @PutMapping
-    @ApiOperation(value="메뉴 수정", notes="메뉴 수정")
-    public ResultVO updateMenu(MenuVO menuVO) {
-        return menuService.updateMenu(menuVO);
-    }
-
-    @DeleteMapping("/{menuId}")
-    public ResultVO deleteMenu(@PathVariable int menuId) {
-        return menuService.deleteMenu(menuId);
     }
 
     @PutMapping("/moveMenu/{gu}/{ord}/{menuId}")

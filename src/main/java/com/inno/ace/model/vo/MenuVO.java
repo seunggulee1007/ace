@@ -32,4 +32,6 @@ public class MenuVO extends CommonVO {
     private String name;
     private List<MenuVO> children;
 
+    private List<MenuVO> data;
+
 }

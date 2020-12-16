@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +34,28 @@ public class MenuServiceImpl implements MenuService {
         return ResultVO.builder().data(menuDao.selectMenu(menuId).orElseGet(MenuVO::new)).build();
     }
 
+    @Transactional
+    public ResultVO syncMenu(MenuVO menuVO) throws Exception {
+        List<MenuVO> menuList = menuVO.getData();
+        long result = 0;
+        String resultMsg = "메뉴 동기화에 성공하였습니다.";
+        callMenu(menuList);
+        return ResultVO.builder().result(result).resultMsg(resultMsg).build();
+    }
+
+    public void callMenu(List<MenuVO> menuList) {
+
+        for(MenuVO menuVO : menuList) {
+            if(menuVO.getMenuId() > 0 ) {
+                updateMenu(menuVO);
+            }else {
+                insertMenu(menuVO);
+            }
+            if(menuVO.getChildren().size() > 0) {
+                callMenu(menuVO.getChildren());
+            }
+        }
+    }
     public ResultVO insertMenu(MenuVO menuVO) {
         int result = 0;
         String resultMsg = CommonMsg.SUCCESS_WRITE.getMsg();
