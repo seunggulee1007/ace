@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    @apiNote 메뉴 관련 매퍼
+    @author  seunggu
+ -->
+<mapper namespace="com.inno.ace.model.dao.ace.DeptDao">
+
+    <!--메뉴 전체 리스트 조회 -->
+    <select id="selectDeptList" resultType="deptVO">
+        select
+            dept_id         as deptId,
+            par_dept_id     as parDeptId,
+            dept_nm         as deptNm,
+            ord             as ord,
+            use_yn          as useYn,
+            crt_dtm         as crtDtm,
+            chg_dtm         as chgDtm
+        from tb_dept
+        ORDER BY par_dept_id, ORD asc
+    </select>
+
+    <!-- 메뉴 단건 조회 -->
+    <select id="selectDept" resultType="deptVO">
+        select
+            dept_id         as deptId,
+            par_dept_id     as parDeptId,
+            dept_nm         as deptNm,
+            ord             as ord,
+            use_yn          as useYn,
+            crt_dtm         as crtDtm,
+            chg_dtm         as chgDtm
+        from tb_dept
+        where
+            dept_id = #{deptId}
+    </select>
+
+    <!--메뉴 전체 리스트 조회 -->
+    <select id="selectDeptListByParDeptId" resultType="deptVO">
+        select
+            dept_id         as deptId,
+            par_dept_id     as parDeptId,
+            dept_nm         as deptNm,
+            ord             as ord,
+            use_yn          as useYn,
+            crt_dtm         as crtDtm,
+            chg_dtm         as chgDtm
+        from tb_dept
+        where
+            par_dept_id = #{parDeptId}
+            and dept_id <![CDATA[<>]]> 0
+        ORDER BY ORD asc
+    </select>
+
+    <!-- 순번과 부서아이디 채번 -->
+    <select id="selectOrdAndDeptId" resultType="deptVO">
+        SELECT
+            ifnull(MAX(ORD),0)+1 AS ORD,
+            case par_dept_id
+                when 0 then
+                    IFNULL(MAX(dept_id), 0) +1
+                else
+                    IFNULL(MAX(dept_id), #{parDeptId} * 1000) + 1
+            END  AS deptId
+        FROM tb_dept
+        WHERE par_dept_id = #{parDeptId}
+    </select>
+
+    <!-- 부서 등록 -->
+    <insert id="insertDept" parameterType="deptVO">
+        insert into
+            tb_dept(
+                dept_id,
+                par_dept_id,
+                dept_nm,
+                ord,
+                use_yn,
+                crt_dtm
+            )values (
+                #{deptId},
+                #{parDeptId},
+                #{deptNm},
+                #{ord},
+                #{useYn},
+                now()
+            )
+    </insert>
+
+    <update id="updateOrd">
+        update tb_dept
+            set
+                ord = #{ord}
+            where
+                dept_id = #{deptId}
+    </update>
+
+    <!-- 부서 삭제 -->
+    <delete id="deleteDept">
+        delete from tb_dept
+        where
+            dept_id = #{deptId}
+    </delete>
+
+</mapper>
