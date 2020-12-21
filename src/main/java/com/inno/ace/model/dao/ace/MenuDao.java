@@ -1,6 +1,7 @@
 package com.inno.ace.model.dao.ace;
 
 import com.inno.ace.model.vo.MenuVO;
+import com.inno.ace.model.vo.RouterVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -15,8 +16,7 @@ public interface MenuDao {
     /** 메뉴 조회 */
     Optional<MenuVO>selectMenu(int menuId);
 
-    /** 메뉴아이디, 순번 채번 */
-    Optional<MenuVO> selectOrdAndMenuId(int parMenuId);
+    List<RouterVO>selectRouterMenuList();
 
     /** 부모가 같은 메뉴 전체 조회 */
     List<MenuVO> selectMenuListByParMenuId(int parMenuId);
@@ -24,14 +24,8 @@ public interface MenuDao {
     /** 메뉴 등록 */
     int insertMenu(MenuVO menuVO);
 
-    /** 메뉴 수정 */
-    int updateMenu(MenuVO menuVO);
-
     /** 메뉴 순번 변경 */
     int updateOrd(int ord, int menuId);
-
-    /** 하위 메뉴 삭제 */
-    int deleteChildMenu(int menuId);
 
     /** 메뉴 삭제 */
     int deleteMenu(int menuId);

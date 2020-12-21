@@ -25,7 +25,18 @@
             chg_dtm         as chgDtm,
             chg_id          as chgId
         from tb_menu
+        where
+            use_yn = 'Y'
         ORDER BY par_menu_id, ORD asc
+    </select>
+
+    <select id="selectRouterMenuList" resultType="routerVO">
+        SELECT
+            page_url AS path,
+            menu_nm AS NAME,
+            component AS component
+        FROM tb_menu
+        WHERE page_url Is NOT null
     </select>
 
     <!-- 메뉴 단건 조회 -->
@@ -64,9 +75,7 @@
             component,
             meta_info       as metaInfo,
             crt_dtm         as crtDtm,
-            crt_id          as crtId,
-            chg_dtm         as chgDtm,
-            chg_id          as chgId
+            chg_dtm         as chgDtm
         from tb_menu
         where
             par_menu_id = #{parMenuId}
@@ -102,8 +111,7 @@
                 page_url,
                 component,
                 meta_info,
-                crt_dtm,
-                crt_id
+                crt_dtm
             )values (
                 #{menuId},
                 #{parMenuId},
@@ -115,15 +123,10 @@
                 #{pageUrl},
                 #{component},
                 #{metaInfo},
-                now(),
-                #{crtId}
+                now()
             )
-    </insert>
-
-    <!-- 메뉴 수정 -->
-    <update id="updateMenu" parameterType="menuVO">
-        update tb_menu
-            set
+            on duplicate key
+            update
                 par_menu_id = #{parMenuId},
                 menu_nm = #{menuNm},
                 ord = #{ord},
@@ -133,11 +136,8 @@
                 page_url = #{pageUrl},
                 component = #{component},
                 meta_info = #{metaInfo},
-                chg_dtm = now(),
-                chg_id = #{chgId}
-            where
-                menu_id = #{menuId}
-    </update>
+                chg_dtm = now()
+    </insert>
 
     <update id="updateOrd">
         update tb_menu

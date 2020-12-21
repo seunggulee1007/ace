@@ -24,6 +24,7 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(Exception.class)
     protected ResultVO defaultException(Exception e) {
+        e.printStackTrace();
         ResultVO resultVO = ResultVO.builder()
                 .result(CommonCode.FAIL.getCode())
                 .resultMsg(e.getMessage())
@@ -59,8 +60,7 @@ public class ExceptionAdvice {
     public ResultVO CEmailSigninFailedException(CAuthenticationEntryPointException e, HttpServletRequest request) {
         ResultVO resultVO = ResultVO.builder()
                 .result(CommonCode.FAIL.getCode())
-                .resultMsg(e.getMessage())
-                .errMsg(CommonMsg.EXPIRE_LOGIN.getMsg())
+                .resultMsg(CommonMsg.EXPIRE_LOGIN.getMsg())
                 .build();
         return resultVO;
     }

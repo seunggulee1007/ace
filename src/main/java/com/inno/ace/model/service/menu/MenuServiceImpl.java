@@ -25,8 +25,10 @@ public class MenuServiceImpl implements MenuService {
         }
         menuList = menuList.stream()
                 .filter(menu -> 0 == menu.getMenuId())
-                .sorted(Comparator.comparing(MenuVO::getOrd))
-                .collect(Collectors.toList());
+                .findFirst()
+                .orElseGet(MenuVO::new)
+                .getChildren()
+                ;
         return ResultVO.builder().data(menuList).build();
     }
 
@@ -34,9 +36,12 @@ public class MenuServiceImpl implements MenuService {
         return ResultVO.builder().data(menuDao.selectMenu(menuId).orElseGet(MenuVO::new)).build();
     }
 
+    public ResultVO selectRouterMenuList() {
+        return ResultVO.builder().data(menuDao.selectRouterMenuList()).build();
+    }
+
     @Transactional
-    public ResultVO syncMenu(MenuVO menuVO) throws Exception {
-        List<MenuVO> menuList = menuVO.getData();
+    public ResultVO syncMenu(List<MenuVO> menuList) throws Exception {
         long result = 0;
         String resultMsg = "메뉴 동기화에 성공하였습니다.";
         callMenu(menuList);
@@ -46,56 +51,16 @@ public class MenuServiceImpl implements MenuService {
     public void callMenu(List<MenuVO> menuList) {
 
         for(MenuVO menuVO : menuList) {
-            if(menuVO.getMenuId() > 0 ) {
-                updateMenu(menuVO);
-            }else {
-                insertMenu(menuVO);
-            }
+
+            menuDao.insertMenu(menuVO);
+
             if(menuVO.getChildren().size() > 0) {
                 callMenu(menuVO.getChildren());
             }
         }
     }
-    public ResultVO insertMenu(MenuVO menuVO) {
-        int result = 0;
-        String resultMsg = CommonMsg.SUCCESS_WRITE.getMsg();
-        MenuVO tempMenuVO = menuDao.selectOrdAndMenuId(menuVO.getParMenuId()).orElseGet(MenuVO::new);
-        System.err.println(tempMenuVO.toString());
-        menuVO.setMenuId(tempMenuVO.getMenuId());
-        menuVO.setOrd(tempMenuVO.getOrd());
-        System.err.println(menuVO.toString());
-        if(menuDao.insertMenu(menuVO) < 1) {
-            result = -1;
-            resultMsg = CommonMsg.FAIL_WRITE.getMsg();
-        }
 
-        return ResultVO.builder().result(result).resultMsg(resultMsg).data(menuVO).build();
-    }
-
-    public ResultVO updateMenu(MenuVO menuVO) {
-
-        int result = 0;
-        String resultMsg = CommonMsg.SUCCESS_MODIFY.getMsg();
-        if(menuDao.updateMenu(menuVO) < 1) {
-            result = -1;
-            resultMsg = CommonMsg.FAIL_MODIFY.getMsg();
-        }
-
-        return ResultVO.builder().result(result).resultMsg(resultMsg).data(menuVO).build();
-    }
-
-    public ResultVO deleteMenu(int menuId) {
-        int result = 0;
-        String resultMsg = CommonMsg.SUCCESS_DELETE.getMsg();
-
-        if(menuDao.deleteMenu(menuId) < 1) {
-            result = -1;
-            resultMsg = CommonMsg.FAIL_DELETE.getMsg();
-        }
-
-        return ResultVO.builder().result(result).resultMsg(resultMsg).build();
-    }
-
+    @Transactional
     public ResultVO updateOrd(int gu, int ord, int parMenuId) {
         List<MenuVO> menuList = menuDao.selectMenuListByParMenuId(parMenuId);
         MenuVO menuVO = menuList.get(ord-1);    // 해당 순번에 있는 메뉴 꺼내오기
@@ -124,6 +89,11 @@ public class MenuServiceImpl implements MenuService {
             menuDao.updateOrd(menuList.get(i).getOrd(), menuList.get(i).getMenuId());
         }
         return ResultVO.builder().data(chgOrd).build();
+    }
+
+    public ResultVO deleteMenu(int menuId) {
+        menuDao.deleteMenu(menuId);
+        return ResultVO.builder().resultMsg(CommonMsg.SUCCESS_DELETE.getMsg()).build();
     }
 
 }

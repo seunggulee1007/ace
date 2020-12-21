@@ -7,6 +7,7 @@ import com.inno.ace.model.vo.PagingVO;
 import com.inno.ace.model.vo.ResultVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +31,7 @@ public class CodeMasterServiceImpl implements CodeMasterService {
      * @param codeMasterVO
      * @return
      */
+    @Transactional
     public ResultVO insertCodeMaster(CodeMasterVO codeMasterVO) {
         int result = 0;
         String resultMsg= CommonMsg.SUCCESS_WRITE.getMsg();
@@ -45,6 +47,7 @@ public class CodeMasterServiceImpl implements CodeMasterService {
      * @param codeMasterVO
      * @return
      */
+    @Transactional
     public ResultVO updateCodeMaster(CodeMasterVO codeMasterVO) {
         int result = 0;
         String resultMsg= CommonMsg.SUCCESS_MODIFY.getMsg();
@@ -60,6 +63,7 @@ public class CodeMasterServiceImpl implements CodeMasterService {
      * @param codeMasterId
      * @return
      */
+    @Transactional
     public ResultVO deleteCodeMaster(int codeMasterId) {
         int result = 0;
         String resultMsg= CommonMsg.SUCCESS_DELETE.getMsg();

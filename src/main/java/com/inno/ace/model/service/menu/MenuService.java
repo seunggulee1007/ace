@@ -20,7 +20,9 @@ public interface MenuService {
      */
     ResultVO selectMenu(int menuId);
 
-    ResultVO syncMenu(MenuVO menuVO) throws Exception;
+    ResultVO selectRouterMenuList();
+
+    ResultVO syncMenu(List<MenuVO> menuList) throws Exception;
 
     /**
      * 메뉴 순번 변경
@@ -30,5 +32,12 @@ public interface MenuService {
      * @return
      */
     ResultVO updateOrd(int gu, int ord, int parMenuId);
+
+    /**
+     * 메뉴 삭제
+     * @param menuId
+     * @return
+     */
+    ResultVO deleteMenu(int menuId);
 
 }
