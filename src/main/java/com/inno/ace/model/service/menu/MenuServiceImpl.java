@@ -5,10 +5,13 @@ import com.inno.ace.model.dao.ace.MenuDao;
 import com.inno.ace.model.vo.MenuVO;
 import com.inno.ace.model.vo.ResultVO;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,16 +23,17 @@ public class MenuServiceImpl implements MenuService {
 
     public ResultVO selectMenuList() {
         List<MenuVO> menuList = menuDao.selectMenuList();
+        Map<String, Object> map = new HashMap<>();
+        map.put("routerMenuList",menuList.stream().filter(menu -> StringUtils.isNotEmpty(menu.getPageUrl())).collect(Collectors.toList()));
         for(MenuVO menuVO : menuList) {
             menuVO.setChildren(menuList.stream().filter(menu -> menu.getMenuId() != 0 && menu.getParMenuId()== menuVO.getMenuId()).collect(Collectors.toList()));
         }
-        menuList = menuList.stream()
+        map.put("menuList", menuList.stream()
                 .filter(menu -> 0 == menu.getMenuId())
                 .findFirst()
                 .orElseGet(MenuVO::new)
-                .getChildren()
-                ;
-        return ResultVO.builder().data(menuList).build();
+                .getChildren());
+        return ResultVO.builder().data(map).build();
     }
 
     public ResultVO selectMenu(int menuId) {
