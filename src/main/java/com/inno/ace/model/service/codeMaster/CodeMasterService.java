@@ -4,6 +4,8 @@ import com.inno.ace.model.vo.CodeMasterVO;
 import com.inno.ace.model.vo.PagingVO;
 import com.inno.ace.model.vo.ResultVO;
 
+import java.util.List;
+
 public interface CodeMasterService {
 
     /**
@@ -33,4 +35,7 @@ public interface CodeMasterService {
      * @return
      */
     ResultVO deleteCodeMaster(int codeMasterId);
+
+    ResultVO syncCodeMaster(List<CodeMasterVO> codeMasterList);
+
 }

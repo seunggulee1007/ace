@@ -25,6 +25,8 @@ mybatis:
     map-underscore-to-camel-case: true
     return-instance-for-empty-row: true
 
+file:
+  upload-dir:F://temp/
 
 logging:
   level:

@@ -2,12 +2,16 @@ package com.inno.ace.model.service.codeMaster;
 
 import com.inno.ace.enums.CommonMsg;
 import com.inno.ace.model.dao.ace.CodeMasterDao;
+import com.inno.ace.model.service.code.CodeService;
 import com.inno.ace.model.vo.CodeMasterVO;
+import com.inno.ace.model.vo.CodeVO;
 import com.inno.ace.model.vo.PagingVO;
 import com.inno.ace.model.vo.ResultVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -15,6 +19,7 @@ public class CodeMasterServiceImpl implements CodeMasterService {
 
     // 코드 마스터 dao
     private final CodeMasterDao codeMasterDao;
+    private final CodeService codeService;
 
     /**
      * 코드 마스터 리스트 조회
@@ -72,6 +77,16 @@ public class CodeMasterServiceImpl implements CodeMasterService {
             resultMsg = CommonMsg.FAIL_DELETE.getMsg();
         }
         return ResultVO.builder().result(result).resultMsg(resultMsg).build();
+    }
+
+    public ResultVO syncCodeMaster(List<CodeMasterVO> codeMasterList) {
+        for(CodeMasterVO codeMasterVO : codeMasterList) {
+            codeMasterDao.insertCodeMaster(codeMasterVO);
+            for(CodeVO codeVO : codeMasterVO.getCodeList()) {
+                codeService.insertCode(codeVO);
+            }
+        }
+        return ResultVO.builder().resultMsg(CommonMsg.SUCCESS_SYNC.getMsg()).build();
     }
 
 }

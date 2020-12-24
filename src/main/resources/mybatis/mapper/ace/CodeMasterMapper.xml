@@ -23,16 +23,20 @@
     <!-- 코드 마스터 정보 등록 -->
     <insert id="insertCodeMaster" parameterType="codeMasterVO">
         insert into tb_code_master(
+            code_master_id,
             code_master_nm,
-            use_yn,
             crt_id,
             crt_dtm
         )values (
+            #{codeMasterId},
             #{codeMasterNm},
-            #{useYn},
             #{crtId},
             now()
         )
+        on duplicate key
+        update
+            code_master_nm = #{codeMasterNm},
+            chg_dtm = now()
     </insert>
     
     <!-- 코드 마스터 정보 수정 -->

@@ -3,6 +3,8 @@ package com.inno.ace.model.vo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.List;
+
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class CodeMasterVO extends CommonVO{
@@ -13,5 +15,7 @@ public class CodeMasterVO extends CommonVO{
     private String codeMasterNm;
     /** 사용 여부 */
     private String useYn;
+
+    private List<CodeVO> codeList;
     
 }

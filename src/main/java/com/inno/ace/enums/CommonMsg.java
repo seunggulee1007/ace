@@ -21,6 +21,7 @@ public enum CommonMsg {
     NO_DATA_FOUND("조회된 데이터가 없습니다."),
     SUCCESS_SEARCH("조회에 성공하였습니다."),
     EXPIRE_LOGIN("토큰 유효기간이 만료되었습니다. 다시 로그인 해 주세요."),
+    SUCCESS_SYNC("동기화에 성공하였습니다."),
     ;
     String msg;
     CommonMsg(String msg) {

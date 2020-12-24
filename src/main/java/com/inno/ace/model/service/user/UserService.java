@@ -4,12 +4,17 @@ import com.inno.ace.advice.exception.AlreadyMemberException;
 import com.inno.ace.model.vo.ResultVO;
 import com.inno.ace.model.vo.UserVO;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface UserService {
 
-    public ResultVO signUp(UserVO userVO) throws AlreadyMemberException;
+    ResultVO selectUserList(int deptCd);
+
+    ResultVO signUp(UserVO userVO) throws AlreadyMemberException;
     
-    public ResultVO signIn(UserVO userVO);
+    ResultVO signIn(UserVO userVO);
     
-    public ResultVO chgPwd(UserVO userVO);
-    
+    ResultVO chgPwd(UserVO userVO);
+
+    ResultVO insertUser(HttpServletRequest request, UserVO userVO);
 }
