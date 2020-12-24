@@ -4,11 +4,11 @@ import com.inno.ace.advice.exception.AlreadyMemberException;
 import com.inno.ace.advice.exception.FalseIDException;
 import com.inno.ace.advice.exception.NoMemberException;
 import com.inno.ace.config.JwtTokenProvider;
-import com.inno.ace.enums.CommonCode;
 import com.inno.ace.enums.CommonMsg;
 import com.inno.ace.model.dao.ace.UserDao;
-import com.inno.ace.model.service.file.FileService;
+import com.inno.ace.model.service.profile.ProfileService;
 import com.inno.ace.model.vo.FileVO;
+import com.inno.ace.model.vo.ProfileVO;
 import com.inno.ace.model.vo.ResultVO;
 import com.inno.ace.model.vo.UserVO;
 import com.inno.ace.util.FileUtil;
@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,32 +33,33 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final FileUtil fileUtil;
-    private final FileService fileService;
+    private final ProfileService profileService;
 
     public ResultVO selectUserList(int deptCd) {
         return ResultVO.builder().data(userDao.selectUserListByDeptId(deptCd)).build();
     }
 
+    @Transactional
     public ResultVO insertUser(HttpServletRequest request, UserVO userVO) {
         UserVO user = userDao.selectUser(userVO.getUserId()).orElseGet(() -> new UserVO());
         if(!StringUtils.isEmpty(user.getUserId())) {
             throw new AlreadyMemberException();
         }
-        userVO.setPassword(passwordEncoder.encode(userVO.getPassword()));
+
+        userVO.setPassword(passwordEncoder.encode(userVO.getUserId() + "123!@"));
         if(userDao.insertUser(userVO) > 0) {
             if(request instanceof MultipartHttpServletRequest) {
                 MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) request;
 
                 List<FileVO> fileList = fileUtil.makeFileVO(mRequest);
                 for(FileVO fileVO : fileList) {
-                    fileVO.setRefType(CommonCode.USER_TABLE.getCode());
-                    fileService.insertFile(fileVO);
-
+                    ProfileVO profileVO = new ProfileVO(fileVO);
+                    profileService.insertProfile(profileVO);
                 }
             }
         };
 
-        return signUp(userVO);
+        return ResultVO.builder().resultMsg("등록되었습니다").build();
     }
     public ResultVO signUp(UserVO userVO) throws AlreadyMemberException {
         UserVO user = userDao.selectUser(userVO.getUserId()).orElseGet(() -> new UserVO());

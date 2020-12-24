@@ -17,7 +17,7 @@
             phone,
             email,
             rank_cd as rankCd,
-            fn_code_nm('rankCd', rank_cd) as rankCdNm,
+            fn_code_nm('empRank', rank_cd) as rankCdNm,
             emp_status as empStatus,
             fn_code_nm('empStatus', emp_status) as empStatusNm,
             crt_dtm    as crtDtm
@@ -37,7 +37,7 @@
             phone,
             email,
             rank_cd as rankCd,
-            fn_code_nm('rankCd', rank_cd) as rankCdNm,
+            fn_code_nm('empRank', rank_cd) as rankCdNm,
             emp_status as empStatus,
             fn_code_nm('empStatus', emp_status) as empStatusNm,
             crt_dtm    as crtDtm
@@ -54,6 +54,7 @@
             admin_yn,
             dept_id,
             emp_no,
+            email,
             phone,
             rank_cd,
             emp_status
@@ -64,9 +65,10 @@
             #{adminYn},
             #{deptId},
             #{empNo},
+            #{email},
             #{phone},
             #{rankCd},
-            #{empStatus},
+            #{empStatus}
         ) 
     </insert>
     

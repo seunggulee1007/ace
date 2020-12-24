@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.sql.Date;
 
 /**
- * @apiNote 파일 vo
+ * @apiNote 유저 프로필 vo
  * @author es-seungglee
  *
  */
@@ -16,9 +16,9 @@ import java.sql.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class FileVO {
+public class ProfileVO {
 
-    private int fileId;
+    private int profileId;
     
     private String fileNm;
     
@@ -34,8 +34,15 @@ public class FileVO {
     
     private Date crtDate;
     
-    private String refId;
-    
-    private int refType;
-    
+    private String userId;
+
+    public ProfileVO(FileVO fileVO) {
+        this.fileNm = fileVO.getFileNm();
+        this.originalFileNm = fileVO.getOriginalFileNm();
+        this.filePath = fileVO.getFilePath();
+        this.fileSize = fileVO.getFileSize();
+        this.contentType = fileVO.getContentType();
+        this.extention = fileVO.getExtention();
+    }
+
 }
