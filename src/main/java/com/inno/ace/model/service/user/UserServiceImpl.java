@@ -45,15 +45,14 @@ public class UserServiceImpl implements UserService {
         if(!StringUtils.isEmpty(user.getUserId())) {
             throw new AlreadyMemberException();
         }
-
         userVO.setPassword(passwordEncoder.encode(userVO.getUserId() + "123!@"));
         if(userDao.insertUser(userVO) > 0) {
             if(request instanceof MultipartHttpServletRequest) {
                 MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) request;
-
                 List<FileVO> fileList = fileUtil.makeFileVO(mRequest);
                 for(FileVO fileVO : fileList) {
                     ProfileVO profileVO = new ProfileVO(fileVO);
+                    profileVO.setUserId(userVO.getUserId());
                     profileService.insertProfile(profileVO);
                 }
             }
@@ -99,4 +98,23 @@ public class UserServiceImpl implements UserService {
         return ResultVO.builder().result(result).resultMsg(resultMsg).build();
         
     }
+
+    public ResultVO updateUser(HttpServletRequest request, UserVO userVO){
+        if(userDao.updateUser(userVO) >0 ){
+            if(request instanceof MultipartHttpServletRequest) {
+                MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) request;
+                List<FileVO> fileList = fileUtil.makeFileVO(mRequest);
+                if(fileList.size() > 0 && StringUtils.isNotEmpty(userVO.getPhoto())) {
+                    profileService.deleteFileByUserId(userVO.getUserId());
+                }
+                for(FileVO fileVO : fileList) {
+                    ProfileVO profileVO = new ProfileVO(fileVO);
+                    profileVO.setUserId(userVO.getUserId());
+                    profileService.insertProfile(profileVO);
+                }
+            }
+        }
+        return ResultVO.builder().resultMsg("수정되었습니다").build();
+    }
+
 }

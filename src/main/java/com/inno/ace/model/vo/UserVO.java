@@ -36,5 +36,7 @@ public class UserVO extends CommonVO {
     private int empStatus;
     /** 사원 상태 명 */
     private String empStatusNm;
+    /** 사진 */
+    private String photo;
     
 }

@@ -47,6 +47,7 @@ public class ProfileServiceImpl implements ProfileService {
     public int deleteFileByFileId(int profileId) {
         return profileDao.deleteProfileByProfileId(profileId);
     }
-    
+
+    public int deleteFileByUserId(String userId) {return profileDao.deleteProfileByUserId(userId);}
 
 }

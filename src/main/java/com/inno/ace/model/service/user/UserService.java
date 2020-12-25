@@ -17,4 +17,7 @@ public interface UserService {
     ResultVO chgPwd(UserVO userVO);
 
     ResultVO insertUser(HttpServletRequest request, UserVO userVO);
+
+    ResultVO updateUser(HttpServletRequest request, UserVO userVO);
+
 }

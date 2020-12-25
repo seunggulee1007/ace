@@ -31,5 +31,7 @@ public interface ProfileService {
      * @return
      */
     ProfileVO selectProfile(int profileId);
+
+    int deleteFileByUserId(String userId);
     
 }

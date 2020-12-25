@@ -17,5 +17,7 @@ public interface UserDao {
     int insertUser(UserVO userVO);
     /** 비밀번호 변경 */
     int updatePwd(UserVO userVO);
+    /** 사용자 변경 */
+    int updateUser(UserVO userVO);
     
 }

@@ -51,4 +51,10 @@
             profile_id = #{profileId}
     </delete>
 
+    <delete id="deleteProfileByUserId">
+        delete from tb_profile
+        where
+            user_id = #{userId}
+    </delete>
+
 </mapper>

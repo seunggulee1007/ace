@@ -36,4 +36,11 @@ public interface ProfileDao {
      */
     int deleteProfileByProfileId(int profileId);
 
+    /**
+     * 사용자 아이디 관련 파일 삭제
+     * @param userId
+     * @return
+     */
+    int deleteProfileByUserId(String userId);
+
 }

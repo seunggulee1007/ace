@@ -25,4 +25,9 @@ public class UserController {
         return userService.insertUser(request, userVO);
     }
 
+    @PutMapping
+    public ResultVO updateUser(HttpServletRequest request, UserVO userVO) {
+        return userService.updateUser(request, userVO);
+    }
+
 }
