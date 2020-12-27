@@ -9,6 +9,8 @@ import java.util.Optional;
 @Mapper
 public interface AuthGroupDao {
 
+   public int selectDupleGroupNm(String authGroupNm);
+
    List<AuthGroupVO> selectAuthGroupList();
 
    Optional<AuthGroupVO> selectAuthGroup(int authGroupId);

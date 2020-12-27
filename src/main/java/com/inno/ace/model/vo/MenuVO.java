@@ -34,4 +34,6 @@ public class MenuVO extends CommonVO {
 
     private List<MenuVO> data;
 
+    private List<MenuAuthVO> authList;
+
 }

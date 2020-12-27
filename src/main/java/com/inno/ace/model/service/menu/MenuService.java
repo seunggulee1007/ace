@@ -9,19 +9,29 @@ public interface MenuService {
 
     /**
      * 메뉴 리스트 조회
-     * @return
+     * @return ResultVO
      */
     ResultVO selectMenuList();
 
     /**
      * 메뉴 조회
      * @param menuId
-     * @return
+     * @return ResultVO
      */
     ResultVO selectMenu(int menuId);
 
-    ResultVO selectRouterMenuList();
+    /**
+     * 메뉴 권한 리스트 조회
+     * @return ResultVO
+     */
+    ResultVO selectAuthMenuList(int menuId);
 
+    /**
+     * 메뉴 동기화
+     * @param menuList
+     * @return ResultVO
+     * @throws Exception
+     */
     ResultVO syncMenu(List<MenuVO> menuList) throws Exception;
 
     /**
@@ -29,14 +39,14 @@ public interface MenuService {
      * @param gu
      * @param parMenuId
      * @param ord
-     * @return
+     * @return ResultVO
      */
     ResultVO updateOrd(int gu, int ord, int parMenuId);
 
     /**
      * 메뉴 삭제
      * @param menuId
-     * @return
+     * @return ResultVO
      */
     ResultVO deleteMenu(int menuId);
 

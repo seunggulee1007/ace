@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    @apiNote 권한 그룹 매퍼
+    @author  es-seungglee
+ -->
+<mapper namespace="com.inno.ace.model.dao.ace.AuthGroupDao">
+
+    <select id="selectDupleGroupNm" parameterType="String" resultType="int">
+        select
+            count(*)
+        from tb_auth_group
+        where
+            auth_group_nm = #{authGroupNm}
+    </select>
+
+    <insert id="insertAuthGroup" parameterType="authGroupVO">
+        insert into tb_auth_group(
+            auth_group_nm,
+            use_yn,
+            crt_dtm
+        )values(
+            #{authGroupNm},
+            #{useYn},
+            now()
+       )
+        <selectKey keyProperty="authGroupId" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <update id="updateAuthGroup" parameterType="authGroupVO">
+        update tb_auth_group
+            set
+                auth_group_nm = #{authGroupNm},
+                use_yn = #{useYn},
+                chg_dtm = now()
+            where
+                auth_group_id = #{authGroupId}
+    </update>
+
+    <delete id="deleteAuthGroup">
+        delete from tb_auth_group where auth_group_id = #{authGroupId}
+    </delete>
+
+</mapper>

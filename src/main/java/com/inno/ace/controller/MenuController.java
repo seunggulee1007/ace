@@ -26,10 +26,12 @@ public class MenuController {
         return menuService.selectMenu(menuId);
     }
 
+    @GetMapping("/authMenuList/{menuId}")
+    public ResultVO selectAuthMenuList(@PathVariable int menuId) { return menuService.selectAuthMenuList(menuId); }
+
     @PutMapping("/moveMenu/{gu}/{ord}/{menuId}")
     public ResultVO moveMenu(@PathVariable int gu, @PathVariable int ord, @PathVariable int menuId) {
         return menuService.updateOrd(gu, ord, menuId);
     }
-
 
 }

@@ -21,6 +21,10 @@ public class MenuServiceImpl implements MenuService {
 
     private final MenuDao menuDao;
 
+    /**
+     * 메뉴 리스트 조회
+     * @return
+     */
     public ResultVO selectMenuList() {
         List<MenuVO> menuList = menuDao.selectMenuList();
         Map<String, Object> map = new HashMap<>();
@@ -36,14 +40,29 @@ public class MenuServiceImpl implements MenuService {
         return ResultVO.builder().data(map).build();
     }
 
+    /**
+     * 메뉴 권한 리스트
+     * @return
+     */
+    public ResultVO selectAuthMenuList(int menuId) {
+        return ResultVO.builder().data(menuDao.selectAuthMenuList(menuId)).build();
+    }
+
+    /**
+     * 메뉴 단건 조회
+     * @param menuId
+     * @return
+     */
     public ResultVO selectMenu(int menuId) {
         return ResultVO.builder().data(menuDao.selectMenu(menuId).orElseGet(MenuVO::new)).build();
     }
 
-    public ResultVO selectRouterMenuList() {
-        return ResultVO.builder().data(menuDao.selectRouterMenuList()).build();
-    }
-
+    /**
+     * 메뉴 동기화
+     * @param menuList
+     * @return
+     * @throws Exception
+     */
     @Transactional
     public ResultVO syncMenu(List<MenuVO> menuList) throws Exception {
         long result = 0;
@@ -52,6 +71,10 @@ public class MenuServiceImpl implements MenuService {
         return ResultVO.builder().result(result).resultMsg(resultMsg).build();
     }
 
+    /**
+     * 메뉴 재귀 호출 함수
+     * @param menuList
+     */
     public void callMenu(List<MenuVO> menuList) {
 
         for(MenuVO menuVO : menuList) {
@@ -64,6 +87,13 @@ public class MenuServiceImpl implements MenuService {
         }
     }
 
+    /**
+     * 순서 변경
+     * @param gu
+     * @param ord
+     * @param parMenuId
+     * @return
+     */
     @Transactional
     public ResultVO updateOrd(int gu, int ord, int parMenuId) {
         List<MenuVO> menuList = menuDao.selectMenuListByParMenuId(parMenuId);
@@ -95,6 +125,11 @@ public class MenuServiceImpl implements MenuService {
         return ResultVO.builder().data(chgOrd).build();
     }
 
+    /**
+     * 메뉴 삭제
+     * @param menuId
+     * @return
+     */
     public ResultVO deleteMenu(int menuId) {
         menuDao.deleteMenu(menuId);
         return ResultVO.builder().resultMsg(CommonMsg.SUCCESS_DELETE.getMsg()).build();

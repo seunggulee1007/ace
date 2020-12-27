@@ -118,5 +118,15 @@ public class ExceptionAdvice {
                 .errMsg(e.getStackTrace()[0].toString())
                 .build();
     }
+
+    @ExceptionHandler(DuplicationException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    protected ResultVO DuplicationException(DuplicationException e) {
+        return ResultVO.builder()
+                .result(CommonCode.FAIL.getCode())
+                .resultMsg(e.getMessage())
+                .errMsg(e.getStackTrace()[0].toString())
+                .build();
+    }
     
 }

@@ -6,6 +6,74 @@
  -->
 <mapper namespace="com.inno.ace.model.dao.ace.MenuDao">
 
+    <resultMap id="authMenuMap" type="menuVO">
+        <result property="menuId" column="menuId"/>
+        <result property="menuNm" column="menuNm"/>
+        <collection property="authList" column="menuId" resultMap="authMap"/>
+    </resultMap>
+
+    <resultMap id="authMap" type="menuAuthVO">
+        <result property="menuId" column="mMenuId"/>
+        <result property="menuAuthId" column="menuAuthId"/>
+        <result property="authType" column="authType"/>
+        <result property="authGroupId" column="authGroupId"/>
+        <result property="authGroupNm" column="authGroupNm"/>
+    </resultMap>
+
+    <!-- select id="selectAuthMenuList" resultMap="authMenuMap">
+        SELECT
+            m.menu_id AS menuId,
+            m.menu_nm AS menuNm,
+            auth_group_id AS authGroupId,
+            auth_group_nm AS authGroupNm,
+            ma.menu_id AS mMenuId,
+            menu_auth_id AS menuAuthId,
+            ifnull(auth_type,'N') AS authType
+
+        FROM tb_menu m
+        cross JOIN (
+            SELECT
+                auth_group_id,
+                auth_group_nm,
+                menu_id,
+                auth_type,
+                menu_auth_id
+            FROM tb_auth_group
+            LEFT JOIN tb_menu_auth
+            USING(auth_group_id)
+            WHERE
+                use_yn = 'Y'
+        ) ma
+        WHERE
+            m.menu_id = #{menuId}
+    </select -->
+
+    <select id="selectAuthMenuList" resultType="menuAuthVO">
+        SELECT
+            m.menu_nm AS menuNm,
+            auth_group_id AS authGroupId,
+            auth_group_nm AS authGroupNm,
+            ma.menu_id AS menuId,
+            menu_auth_id AS menuAuthId,
+            ifnull(auth_type,'N') AS authType
+
+        FROM tb_menu m
+        cross JOIN (
+            SELECT
+                auth_group_id,
+                auth_group_nm,
+                menu_id,
+                auth_type,
+                menu_auth_id
+            FROM tb_auth_group
+            LEFT JOIN tb_menu_auth
+            USING(auth_group_id)
+            WHERE
+                use_yn = 'Y'
+        ) ma
+        WHERE
+            m.menu_id = #{menuId}
+    </select>
     <!--메뉴 전체 리스트 조회 -->
     <select id="selectMenuList" resultType="menuVO">
         select

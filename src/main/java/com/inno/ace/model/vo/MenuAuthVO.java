@@ -13,6 +13,8 @@ public class MenuAuthVO extends CommonVO {
     private int menuId;
     /** 권한 그룹 아이디 */
     private int authGroupId;
+    /** 권한 그룹 명 */
+    private String authGroupNm;
     /** 권한 종류 (R:read, W:write, N:none) */
     private String authType;
 

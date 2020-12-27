@@ -3,9 +3,10 @@ package com.inno.ace.model.vo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.List;
+
 @Data
-@EqualsAndHashCode(callSuper = false)
-public class AuthGroupVO extends CommonVO{
+public class AuthGroupVO{
 
     /** 권한 그룹 아이디 */
     private int authGroupId;
@@ -13,5 +14,7 @@ public class AuthGroupVO extends CommonVO{
     private String authGroupNm;
     /** 사용 여부 */
     private String useYn;
+
+    private List<AuthGroupUserVO> authUserList;
 
 }

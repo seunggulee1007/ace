@@ -35,9 +35,4 @@ public class CommonController {
         return ResultVO.builder().data(map).build();
     }
 
-    @GetMapping("/menuList")
-    public ResultVO selectMenuList() {
-        return menuService.selectRouterMenuList();
-    }
-
 }

@@ -1,5 +1,6 @@
 package com.inno.ace.model.dao.ace;
 
+import com.inno.ace.model.vo.MenuAuthVO;
 import com.inno.ace.model.vo.MenuVO;
 import com.inno.ace.model.vo.RouterVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,7 +17,8 @@ public interface MenuDao {
     /** 메뉴 조회 */
     Optional<MenuVO>selectMenu(int menuId);
 
-    List<RouterVO>selectRouterMenuList();
+    /** 메뉴 권한 리스트 */
+    List<MenuAuthVO> selectAuthMenuList(int menuId);
 
     /** 부모가 같은 메뉴 전체 조회 */
     List<MenuVO> selectMenuListByParMenuId(int parMenuId);
