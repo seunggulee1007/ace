@@ -1,6 +1,7 @@
 
 spring:
-
+  profiles:
+    active: local
   ## datasource 설정
   datasource:
     hikari:
@@ -26,7 +27,7 @@ mybatis:
     return-instance-for-empty-row: true
 
 file:
-  upload-dir: F://temp/
+  upload-dir: /home/tomcat/img/
 
 logging:
   level:
