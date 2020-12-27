@@ -50,29 +50,23 @@
 
     <select id="selectAuthMenuList" resultType="menuAuthVO">
         SELECT
-            m.menu_nm AS menuNm,
-            auth_group_id AS authGroupId,
-            auth_group_nm AS authGroupNm,
-            ma.menu_id AS menuId,
-            menu_auth_id AS menuAuthId,
-            ifnull(auth_type,'N') AS authType
-
-        FROM tb_menu m
-        cross JOIN (
-            SELECT
-                auth_group_id,
-                auth_group_nm,
-                menu_id,
-                auth_type,
-                menu_auth_id
-            FROM tb_auth_group
-            LEFT JOIN tb_menu_auth
-            USING(auth_group_id)
+            auth_group_id as authGroupId,
+            auth_group_nm as authGroupNm,
+            menu_auth_id as menuAuthId,
+            menu_id as menuId,
+            ifnull(auth_type, 'N') AS authType
+        FROM tb_auth_group tg
+        LEFT JOIN (
+            select
+                   auth_group_id,
+                   menu_auth_id,
+                   menu_id,
+                   auth_type
+            from tb_menu_auth
             WHERE
-                use_yn = 'Y'
-        ) ma
-        WHERE
-            m.menu_id = #{menuId}
+                  menu_id = #{menuId}
+            ) ma
+       USING(auth_group_id)
     </select>
     <!--메뉴 전체 리스트 조회 -->
     <select id="selectMenuList" resultType="menuVO">
