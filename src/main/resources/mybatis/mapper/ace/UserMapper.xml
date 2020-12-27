@@ -20,6 +20,7 @@
             emp_status as empStatus,
             fn_code_nm('empStatus', emp_status) as empStatusNm,
             concat('/static/img/', file_nm) as photo,
+            fn_dept_nm(dept_id) as deptNm,
             u.crt_dtm    as crtDtm
         from tb_user u
         left join tb_profile
@@ -31,6 +32,7 @@
     <select id="selectUser" resultType="userVO">
         select
             user_id    as userId,
+            password,
             user_nm    as userNm,
             admin_yn   as adminYn,
             dept_id as deptId,
