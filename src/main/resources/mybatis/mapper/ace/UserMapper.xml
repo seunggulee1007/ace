@@ -27,6 +27,7 @@
         using(user_id)
         where
             dept_id = #{deptId}
+        order by crtDtm, rankCd
     </select>
 
     <select id="selectUser" resultType="userVO">
@@ -85,7 +86,8 @@
                 emp_no = #{empNo},
                 email = #{email},
                 phone = #{phone},
-                rank_cd = #{rankCd}
+                rank_cd = #{rankCd},
+                emp_status = #{empStatus}
         where
             user_id = #{userId}
     </update>
