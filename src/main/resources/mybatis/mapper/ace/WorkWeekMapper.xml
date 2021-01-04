@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inno.ace.model.dao.ace.WorkWeekDao">
+
+    <insert id="insertWorkWeek" parameterType="workWeekVO">
+        insert into tb_work_week(
+            work_group_id,
+            week_cd,
+            crt_dtm
+        )values(
+            #{workGroupId},
+            #{weekCd},
+            now()
+       )
+    </insert>
+
+    <!--근무 시간 삭제 -->
+    <delete id="deleteWorkWeek">
+        delete from tb_work_week where work_week_id = #{workWeekId}
+    </delete>
+
+    <!--근무 시간 삭제 -->
+    <delete id="deleteWorkWeekByWorkGroupId">
+        delete from tb_work_week where work_group_id = #{workGroupId}
+    </delete>
+
+</mapper>

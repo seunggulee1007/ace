@@ -35,10 +35,21 @@ public class UserServiceImpl implements UserService {
     private final FileUtil fileUtil;
     private final ProfileService profileService;
 
+    /**
+     * 사용자 리스트 조회
+     * @param deptCd
+     * @return
+     */
     public ResultVO selectUserList(int deptCd) {
         return ResultVO.builder().data(userDao.selectUserListByDeptId(deptCd)).build();
     }
 
+    /**
+     * 사용자 등록
+     * @param request
+     * @param userVO
+     * @return
+     */
     @Transactional
     public ResultVO insertUser(HttpServletRequest request, UserVO userVO) {
         UserVO user = userDao.selectUser(userVO.getUserId()).orElseGet(() -> new UserVO());
@@ -60,6 +71,14 @@ public class UserServiceImpl implements UserService {
 
         return ResultVO.builder().resultMsg("등록되었습니다").build();
     }
+
+    /**
+     * 회원 가입
+     * @param userVO
+     * @return
+     * @throws AlreadyMemberException
+     */
+    @Transactional
     public ResultVO signUp(UserVO userVO) throws AlreadyMemberException {
         UserVO user = userDao.selectUser(userVO.getUserId()).orElseGet(() -> new UserVO());
         if(!StringUtils.isEmpty(user.getUserId())) {
@@ -69,7 +88,12 @@ public class UserServiceImpl implements UserService {
         userDao.insertUser(userVO);
         return ResultVO.builder().resultMsg("등록되었습니다").build();
     }
-    
+
+    /**
+     * 로그인
+     * @param userVO
+     * @return
+     */
     public ResultVO signIn(UserVO userVO) {
         List<String> authorities = new ArrayList<>();
         UserVO user = userDao.selectUser(userVO.getUserId()).orElseThrow(NoMemberException::new);
@@ -77,14 +101,13 @@ public class UserServiceImpl implements UserService {
         if (!passwordEncoder.matches(userVO.getPassword(), user.getPassword())) throw new FalseIDException();
         String token = jwtTokenProvider.createToken(user.getUserId(), authorities);
         Map<String, Object> map = new HashMap<>();
-        userVO.setUserNm(user.getUserNm());
-        userVO.setAdminYn(user.getAdminYn());
+        user.setPassword(null);
         map.put("authToken", token);
-        map.put("user", userVO);
+        map.put("user", user);
         return ResultVO.builder().data(map).resultMsg(CommonMsg.SUCCESS_LOGIN.getMsg()).build();
     }
 
-    
+    @Transactional
     public ResultVO chgPwd(UserVO userVO) {
         UserVO user = userDao.selectUser(userVO.getUserId()).orElseThrow(NoMemberException::new);
         String resultMsg = "비밀번호 변경에 실패하였습니다.";
@@ -99,6 +122,13 @@ public class UserServiceImpl implements UserService {
         
     }
 
+    /**
+     * 사용자 변경
+     * @param request
+     * @param userVO
+     * @return
+     */
+    @Transactional
     public ResultVO updateUser(HttpServletRequest request, UserVO userVO){
         if(userDao.updateUser(userVO) >0 ){
             if(request instanceof MultipartHttpServletRequest) {

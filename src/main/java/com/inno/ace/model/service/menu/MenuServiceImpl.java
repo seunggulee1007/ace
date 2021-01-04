@@ -130,6 +130,7 @@ public class MenuServiceImpl implements MenuService {
      * @param menuId
      * @return
      */
+    @Transactional
     public ResultVO deleteMenu(int menuId) {
         menuDao.deleteMenu(menuId);
         return ResultVO.builder().resultMsg(CommonMsg.SUCCESS_DELETE.getMsg()).build();

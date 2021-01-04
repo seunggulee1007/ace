@@ -6,6 +6,7 @@ import com.inno.ace.model.vo.FileVO;
 import com.inno.ace.model.vo.ProfileVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class ProfileServiceImpl implements ProfileService {
      * @author es-seungglee
      * 
      */
+    @Transactional
     public int insertProfile(ProfileVO profileVO) {
         return profileDao.insertProfile(profileVO);
     }
@@ -44,10 +46,12 @@ public class ProfileServiceImpl implements ProfileService {
      * @param profileId
      * @return
      */
+    @Transactional
     public int deleteFileByFileId(int profileId) {
         return profileDao.deleteProfileByProfileId(profileId);
     }
 
+    @Transactional
     public int deleteFileByUserId(String userId) {return profileDao.deleteProfileByUserId(userId);}
 
 }

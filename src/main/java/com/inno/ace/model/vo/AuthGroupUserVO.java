@@ -3,6 +3,9 @@ package com.inno.ace.model.vo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * 권한 그룹 VO
+ */
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class AuthGroupUserVO extends CommonVO {
@@ -13,5 +16,11 @@ public class AuthGroupUserVO extends CommonVO {
     private int authGroupId;
     /** 사용자 아이디 */
     private String userId;
+
+    private String userNm;
+
+    private String deptNm;
+
+    private String empStatusNm;
 
 }

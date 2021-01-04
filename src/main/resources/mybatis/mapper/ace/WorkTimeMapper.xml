@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inno.ace.model.dao.ace.WorkTimeDao">
+
+    <insert id="insertWorkTime" parameterType="workTimeVO">
+        insert into tb_work_time(
+            work_group_id,
+            work_time_type,
+            work_time_fr,
+            work_time_to,
+            crt_dtm
+        )values(
+            #{workGroupId},
+            #{workTimeType},
+            #{workTimeFr},
+            #{workTimeTo},
+            now()
+       )
+    </insert>
+
+    <update id="updateWorkTime" parameterType="workTimeVO">
+        update tb_work_time
+            set
+                work_group_id = #{workGroupId},
+                work_time_type = #{workTimeType},
+                work_time_fr = #{worTimeFr},
+                work_time_to = #{workTimeTo},
+                chg_dtm = now()
+            where
+                work_time_id = #{workTimeId}
+    </update>
+
+    <!--근무 시간 삭제 -->
+    <delete id="deleteWorkTime">
+        delete from tb_work_time where work_time_id = #{workTimeId}
+    </delete>
+
+    <!--근무 시간 삭제 -->
+    <delete id="deleteWorkTimeByWorkGroupId">
+        delete from tb_work_time where work_group_id = #{workGroupId}
+    </delete>
+
+</mapper>

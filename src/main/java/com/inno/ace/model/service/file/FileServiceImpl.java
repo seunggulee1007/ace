@@ -4,6 +4,7 @@ import com.inno.ace.model.dao.ace.FileDao;
 import com.inno.ace.model.vo.FileVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class FileServiceImpl implements FileService {
      * @author es-seungglee
      * 
      */
+    @Transactional
     public int insertFile(FileVO fileVO) {
         return fileDao.insertFile(fileVO);
     }
@@ -52,6 +54,7 @@ public class FileServiceImpl implements FileService {
      * @param fileId
      * @return
      */
+    @Transactional
     public int deleteFileByFileId(int fileId) {
         return fileDao.deleteFileByFileId(fileId);
     }
@@ -61,7 +64,9 @@ public class FileServiceImpl implements FileService {
      * @param
      * @return
      */
+    @Transactional
     public int deleteFileByRefId(int refId, int refType) {
         return fileDao.deleteFileByBoardId(refId, refType);
     }
+
 }

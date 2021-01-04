@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inno.ace.model.dao.ace.WorkGroupDao">
+
+    <resultMap id="workGroupMap" type="workGroupVO">
+        <result property="workGroupId" column="workGroupId"/>
+        <result property="workType" column="workType"/>
+        <result property="workTypeNm" column="workTypeNm"/>
+        <result property="workGroupNm" column="workGroupNm"/>
+        <result property="stdWorkingHours" column="stdWorkingHours"/>
+        <result property="stdWorkingHoursNm" column="stdWorkingHoursNm"/>
+        <result property="settlementUnit" column="settlementUnit"/>
+        <result property="settlementUnitNm" column="settlementUnitNm"/>
+        <result property="startDt" column="startDt"/>
+        <result property="crtDtm" column="crtDtm"/>
+        <collection property="workDeptList" column="workGroupId" resultMap="workDeptMap"/>
+        <collection property="workUserList" column="workGroupId" resultMap="workUserMap"/>
+        <collection property="workTimeList" column="workGroupId" resultMap="workTimeMap"/>
+        <collection property="workWeekList" column="workGroupId" resultMap="workWeekMap"/>
+    </resultMap>
+
+    <resultMap id="workDeptMap" type="workDeptVO">
+        <result property="workGroupId" column="workGroupId"/>
+        <result property="workDeptId" column="workDeptId"/>
+        <result property="deptId" column="deptId"/>
+        <result property="deptNm" column="deptNm"/>
+    </resultMap>
+
+    <resultMap id="workUserMap" type="workUserVO">
+        <result property="workGroupId" column="workGroupId"/>
+        <result property="workUserId" column="workUserId"/>
+        <result property="userId" column="userId"/>
+        <result property="userNm" column="userNm"/>
+    </resultMap>
+
+    <resultMap id="workTimeMap" type="workTimeVO">
+        <result property="workGroupId" column="workGroupId"/>
+        <result property="workTimeId" column="workTimeId"/>
+        <result property="workTimeType" column="workTimeType"/>
+        <result property="workTimeTypeNm" column="workTimeTypeNm"/>
+        <result property="workTimeFr" column="workTimeFr"/>
+        <result property="workTimeTo" column="workTimeTo"/>
+    </resultMap>
+
+    <resultMap id="workWeekMap" type="workWeekVO">
+        <result property="workGroupId" column="workGroupId"/>
+        <result property="workWeekId" column="workWeekId"/>
+        <result property="weekCd" column="weekCd"/>
+        <result property="weekCdNm" column="weekCdNm"/>
+    </resultMap>
+
+    <resultMap id="workGroupListMap" type="workGroupVO">
+        <result property="workGroupId" column="workGroupId"/>
+        <result property="workType" column="workType"/>
+        <result property="workTypeNm" column="workTypeNm"/>
+        <result property="workGroupNm" column="workGroupNm"/>
+        <result property="stdWorkingHours" column="stdWorkingHours"/>
+        <result property="stdWorkingHoursNm" column="stdWorkingHoursNm"/>
+        <result property="settlementUnit" column="settlementUnit"/>
+        <result property="settlementUnitNm" column="settlementUnitNm"/>
+        <result property="startDt" column="startDt"/>
+        <result property="crtDtm" column="crtDtm"/>
+        <collection property="workUserResList" column="workGroupId" resultMap="workUserListMap"/>
+    </resultMap>
+
+    <resultMap id="workUserListMap" type="workUserResVO">
+        <result property="userNm" column="userNm"/>
+        <result property="deptNm" column="deptNm"/>
+        <result property="workTimeFr" column="workTimeFr"/>
+        <result property="workTimeTo" column="workTimeTo"/>
+        <result property="photo" column="photo"/>
+    </resultMap>
+
+    <select id="selectWorkGroup" resultMap="workGroupMap">
+        SELECT
+               work_group_id                                    AS workGroupId,
+               work_type                                        AS workType,
+               fn_code_nm('workType', work_type)                AS workTypeNm,
+               work_group_nm                                    AS workGroupNm,
+               std_working_hours                                AS stdWorkingHours,
+               fn_code_nm('stdWorkingHours', std_working_hours) AS stdWorkingHoursNm,
+               settlement_unit                                  as steelementUint,
+               fn_code_nm('settlementUnit', settlement_unit)    AS settlementUnitNm,
+               start_dt                                         AS startDt,
+               wg.crt_dtm                                       AS crtDtm,
+               wg.chg_dtm                                       AS chgDtm,
+               work_dept_id                                     AS workDeptId,
+               wd.dept_id                                       AS deptId,
+               dept_nm                                          AS deptNm,
+               work_user_id                                     AS workUserId,
+               user_id                                          AS userId,
+               user_nm                                          AS userNm,
+               work_week_id                                     AS workWeekId,
+               week_cd                                          AS weekCd,
+               case
+                   week_cd
+                   when 1 then '일'
+                   when 2 then '월'
+                   when 3 then '화'
+                   when 4 then '수'
+                   when 5 then '목'
+                   when 6 then '금'
+                   when 7 then '일'
+                   ELSE '-' END                                 AS weekCdNm,
+               work_time_id                                     AS workTimeId,
+               work_time_type                                   AS workTimeType,
+               case work_time_type
+                   when 'R' then '휴식'
+                   when 'C' then '의무'
+                   when 'W' then '근무'
+                   ELSE '-' END                                 AS workTimeTypeNm,
+               work_time_fr                                     AS workTimeFr,
+               work_time_to                                     AS workTimeTo
+        FROM tb_work_group wg
+        LEFT JOIN tb_work_dept wd
+        USING (work_group_id)
+        LEFT JOIN tb_dept
+        USING (dept_id)
+        LEFT JOIN tb_work_user
+        USING (work_group_id)
+        LEFT JOIN tb_user
+        USING (user_id)
+        LEFT JOIN tb_work_week
+        USING (work_group_id)
+        LEFT JOIN tb_work_time
+        USING (work_group_id)
+        where
+              work_group_id = #{workGroupId}
+    </select>
+
+    <select id="selectWorkGroupList" parameterType="pagingVO" resultMap="workGroupListMap">
+        SELECT
+            work_group_id AS workGroupId,
+            fn_code_nm('workType',work_type) AS workTypeNm,
+            work_group_nm AS workGroupNm,
+            wg.crt_dtm AS crtDtm,
+            user_nm AS userNm,
+            dept_nm AS deptNm,
+            photo,
+            fn_code_nm('empRank', rank_cd) as rankCdNm,
+            work_time_fr AS workTimeFr,
+            work_time_to AS workTimeTo
+        FROM (
+        SELECT
+            work_group_id,
+            work_type,
+            work_group_nm,
+            crt_dtm
+        FROM tb_work_group
+        <where>
+            <if test="searchKeyword != null and searchKeyword != ''">
+                <choose>
+                    <when test="searchKind eq '1'.toString()">
+                        and fn_code_nm('workType',work_type) LIKE CONCAT('%',#{searchKeyword},'%')
+                    </when>
+                    <otherwise>
+                        and work_group_nm LIKE CONCAT('%',#{searchKeyword},'%')
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+        LIMIT #{pageNo}, #{listCnt}
+        ) wg
+        LEFT JOIN (
+            SELECT
+                work_group_id,
+                user_nm,
+                dept_nm,
+                concat('/static/img/', file_nm) as photo,
+                rank_cd
+            FROM tb_work_dept
+            JOIN tb_dept
+            USING(dept_id)
+            LEFT JOIN tb_user
+            USING(dept_id)
+            left join tb_profile
+            using(user_id)
+            UNION ALL
+            SELECT
+                work_group_id,
+                user_nm,
+                dept_nm,
+                concat('/static/img/', file_nm) as photo,
+                rank_cd
+            FROM tb_work_user
+            JOIN tb_user
+            USING(user_id)
+            JOIN tb_dept
+            USING(dept_id)
+            left join tb_profile
+            using(user_id)
+        ) t
+        USING(work_group_id)
+        LEFT JOIN (
+            select
+                work_group_id,
+                work_time_fr,
+                work_time_to
+            FROM tb_work_time
+            where
+            work_time_type = 'W'
+        ) wt
+        USING(work_group_id)
+    </select>
+
+    <select id="selectDupleGroupNm" parameterType="String" resultType="int">
+        select count(*)
+        from tb_work_group
+        where work_group_nm = #{workGroupNm}
+    </select>
+
+    <insert id="insertWorkGroup" parameterType="workGroupVO">
+        insert into tb_work_group(
+            work_group_nm,
+            work_type,
+            std_working_hours,
+            settlement_unit,
+            start_dt,
+            crt_dtm
+        )values(
+            #{workGroupNm},
+            #{workType},
+            #{stdWorkingHours},
+            #{settlementUnit},
+            #{startDt},
+            now()
+        )
+        <selectKey keyProperty="workGroupId" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <!--근무 그룹 수정 -->
+    <update id="updateWorkGroup" parameterType="workGroupVO">
+        update tb_work_group
+        set work_group_nm     = #{workGroupNm},
+            work_type         = #{workType},
+            std_working_hours = #{stdWorkingHours},
+            settlement_unit   = #{settlementUnit},
+            start_dt          = #{startDt},
+            chg_dtm           = now()
+        where work_group_id = #{workGroupId}
+    </update>
+
+    <!--근무 그룹 삭제 -->
+    <delete id="deleteWorkGroup">
+        delete
+        from tb_work_group
+        where work_group_id = #{workGroupId}
+    </delete>
+
+</mapper>

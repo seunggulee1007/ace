@@ -126,6 +126,7 @@ public class DeptServiceImpl implements DeptService {
      * @param deptId
      * @return
      */
+    @Transactional
     public ResultVO deleteDept(int deptId) {
         deptDao.deleteDept(deptId);
         return ResultVO.builder().resultMsg(CommonMsg.SUCCESS_DELETE.getMsg()).build();

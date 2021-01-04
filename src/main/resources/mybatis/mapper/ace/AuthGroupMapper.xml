@@ -6,6 +6,43 @@
  -->
 <mapper namespace="com.inno.ace.model.dao.ace.AuthGroupDao">
 
+    <resultMap id="authGroupMap" type="authGroupVO">
+        <result property="authGroupId" column="authGroupId"/>
+        <result property="authGroupNm" column="authGroupNm"/>
+        <result property="useYn" column="useYn"/>
+        <result property="crtDtm" column="crtDtm"/>
+        <result property="chgDtm" column="chgDtm"/>
+        <collection property="authUserList" column="authGroupId" resultMap="authGroupUserMap"/>
+    </resultMap>
+
+    <resultMap id="authGroupUserMap" type="authGroupUserVO">
+        <result property="authGroupId" column="authGroupId"/>
+        <result property="userId" column="userId"/>
+        <result property="userNm" column="userNm"/>
+        <result property="deptNm" column="deptNm"/>
+        <result property="empStatusNm" column="empStatusNm"/>
+    </resultMap>
+
+    <select id="selectAuthGroupList" resultMap="authGroupMap">
+        select
+            auth_group_id as authGroupId,
+            auth_group_nm as authGroupNm,
+            ag.use_yn as useYn,
+            user_id as userId,
+            user_nm as userNm,
+            dept_nm as deptNm,
+            fn_code_nm('empStatus',emp_status) as empStatusNm,
+            ag.crt_dtm as crtDtm,
+            ag.chg_dtm as chgDtm
+        from tb_auth_group ag
+        left join tb_auth_group_user agu
+        using(auth_group_id)
+        JOIN tb_user tu
+        USING(user_id)
+        JOIN tb_dept td
+        USING(dept_id)
+    </select>
+
     <select id="selectDupleGroupNm" parameterType="String" resultType="int">
         select
             count(*)

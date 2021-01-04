@@ -13,6 +13,11 @@ public class AuthGroupController {
 
     private final AuthGroupService authGroupService;
 
+    @GetMapping("/authGroupList")
+    public ResultVO authGroupList() {
+        return authGroupService.selectAuthGroupList();
+    }
+
     @GetMapping("/confirmDuple/{authGroupNm}")
     public ResultVO confirmDuple(@PathVariable String authGroupNm) {
         return authGroupService.selectDupleGroupNm(authGroupNm);

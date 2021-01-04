@@ -6,7 +6,8 @@ import lombok.EqualsAndHashCode;
 import java.util.List;
 
 @Data
-public class AuthGroupVO{
+@EqualsAndHashCode(callSuper = false)
+public class AuthGroupVO extends CommonVO {
 
     /** 권한 그룹 아이디 */
     private int authGroupId;

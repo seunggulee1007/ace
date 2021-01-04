@@ -92,15 +92,6 @@
         ORDER BY par_menu_id, ORD asc
     </select>
 
-    <select id="selectRouterMenuList" resultType="routerVO">
-        SELECT
-            page_url AS path,
-            menu_nm AS NAME,
-            component AS component
-        FROM tb_menu
-        WHERE page_url Is NOT null
-    </select>
-
     <!-- 메뉴 단건 조회 -->
     <select id="selectMenu" resultType="menuVO">
         select

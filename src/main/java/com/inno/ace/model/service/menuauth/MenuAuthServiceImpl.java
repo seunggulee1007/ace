@@ -6,6 +6,7 @@ import com.inno.ace.model.vo.MenuAuthVO;
 import com.inno.ace.model.vo.ResultVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -13,6 +14,12 @@ public class MenuAuthServiceImpl implements MenuAuthService {
 
     private final MenuAuthDao menuAuthDao;
 
+    /**
+     * 메뉴 권한 등록
+     * @param menuAuthVO
+     * @return
+     */
+    @Transactional
     public ResultVO insertMenuAuth(MenuAuthVO menuAuthVO) {
         long result = 0;
         String resultMsg = CommonMsg.SUCCESS_WRITE.getMsg();
@@ -23,6 +30,12 @@ public class MenuAuthServiceImpl implements MenuAuthService {
         return ResultVO.builder().result(result).resultMsg(resultMsg).data(menuAuthVO).build();
     }
 
+    /**
+     * 메뉴 권한 수정
+     * @param menuAuthVO
+     * @return
+     */
+    @Transactional
     public ResultVO updateMenuAuth(MenuAuthVO menuAuthVO) {
         long result = 0;
         String resultMsg = CommonMsg.SUCCESS_MODIFY.getMsg();

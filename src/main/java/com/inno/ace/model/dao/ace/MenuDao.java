@@ -2,7 +2,6 @@ package com.inno.ace.model.dao.ace;
 
 import com.inno.ace.model.vo.MenuAuthVO;
 import com.inno.ace.model.vo.MenuVO;
-import com.inno.ace.model.vo.RouterVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

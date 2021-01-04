@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inno.ace.model.dao.ace.WorkDeptDao">
+
+    <insert id="insertWorkDept" parameterType="workDeptVO">
+        insert into tb_work_dept(
+            dept_id,
+            work_group_id,
+            crt_dtm
+        )values(
+            #{deptId},
+            #{workGroupId},
+            now()
+       )
+    </insert>
+
+    <!--근무 그룹 삭제 -->
+    <delete id="deleteWorkDept">
+        delete from tb_work_dept where work_dept_id = #{workDeptId}
+    </delete>
+
+    <!--근무 그룹 삭제 -->
+    <delete id="deleteWorkDeptByWorkGroupId">
+        delete from tb_work_dept where work_group_id = #{workGroupId}
+    </delete>
+
+</mapper>
