@@ -70,6 +70,7 @@
         <result property="workTimeFr" column="workTimeFr"/>
         <result property="workTimeTo" column="workTimeTo"/>
         <result property="photo" column="photo"/>
+        <result property="rankCdNm" column="rankCdNm"/>
     </resultMap>
 
     <select id="selectWorkGroup" resultMap="workGroupMap">
