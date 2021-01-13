@@ -1,6 +1,8 @@
 package com.inno.ace.util;
 
 import com.inno.ace.advice.exception.CommonUtilException;
+import com.inno.ace.config.JwtTokenProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.w3c.dom.Document;
@@ -197,5 +199,19 @@ public class CommonUtil {
         md.update(msg.getBytes());
         return md.digest();
     }
-    
+
+    /**
+     * 바이트를 헥사값으로 변환한다, type 1
+     *
+     * @param bytes
+     * @return
+     */
+    public static String bytesToHex1(byte[] bytes) {
+        StringBuilder builder = new StringBuilder();
+        for (byte b: bytes) {
+            builder.append(String.format("%02x", b));
+        }
+        return builder.toString();
+    }
+
 }
