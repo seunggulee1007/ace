@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    @apiNote 사업자 휴폐업 관련 매퍼
+    @author  es-seungglee
+ -->
+<mapper namespace="com.inno.ace.model.dao.ace.CodeDao">
+
+    <select id="selectBusnOpt" resultType="busnOptVO">
+        
+    </select>
+
+    <insert id="insertBusnOpt" parameterType="busnOptVO">
+        insert into tb_busn_opt(
+            client_id
+            ,manager_id
+            ,busn_opt_nm
+            ,busn_opt_dt
+            ,info_soucre_cd
+            ,project_type_cd
+            ,area_cd
+            ,success_percent_cd
+            ,expect_sales_month
+            ,expect_sales_amt
+            ,crt_id
+            ,crt_dtm
+        )values(
+            #{clientId}
+            ,#{managerId}
+            ,#{busnOptNm}
+            ,#{busnOptDt}
+            ,#{infoSourceCd}
+            ,#{projectTypeCd}
+            ,#{areaCd}
+            ,#{successPercentCd}
+            ,#{expectSalesMonth}
+            ,#{expectSalesAmt}
+            ,#{crtId}
+            ,now()
+        )
+    </insert>
+
+    <update id="updateBusnOpt" parameterType="busnOptVO">
+        update tb_busn_opt
+            set
+                client_id = #{clientId}
+                ,manager_id = #{managerId}
+                ,busn_opt_nm = #{busnOptNm}
+                ,busn_opt_dt = #{busnOptDt}
+                ,info_soucre_cd = #{infoSourceCd}
+                ,project_type_cd = #{projectTypeCd}
+                ,area_cd = #{areacd}
+                ,success_percent_cd = #{successPercentCd}
+                ,expect_sales_month = #{expectSalesMonth}
+                ,expect_sales_amt = #{expectSalesAmt}
+    </update>
+
+
+</mapper>

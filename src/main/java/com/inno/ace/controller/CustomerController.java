@@ -5,6 +5,7 @@ import com.inno.ace.model.vo.ClientVO;
 import com.inno.ace.model.vo.CustomerVO;
 import com.inno.ace.model.vo.PagingVO;
 import com.inno.ace.model.vo.ResultVO;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,42 +22,47 @@ public class CustomerController {
      * @return
      */
     @GetMapping("/confirmDuple/{customerNm}")
+    @ApiOperation(value="중복 조회", notes="고객명 중복 조회")
     public ResultVO confirmDuple(@PathVariable String customerNm) {
         return customerService.confirmDuple(customerNm);
     }
 
     /**
-     * 거래처 조회
+     * 고객 조회
      * @param customerId
      * @return
      */
     @GetMapping("/{customerId}")
+    @ApiOperation(value="고객 조회", notes="고객 아이디로 고객 조회")
     public ResultVO selectCustomer(@PathVariable int customerId) { return customerService.selectCustomer(customerId);}
 
     /**
-     * 거래처 리스트 조회
+     * 고객 리스트 조회
      * @param pagingVO
      * @return
      */
     @GetMapping("/customerList")
+    @ApiOperation(value="고객 리스트 조회", notes="고객 리스트 조회")
     public ResultVO selectCustomerList(PagingVO pagingVO) { return customerService.selectCustomerList(pagingVO);}
 
     /**
-     * 거래처 등록
+     * 고객 등록
      * @param customerVO
      * @return
      */
     @PostMapping
+    @ApiOperation(value="고객 등록", notes="고객 등록")
     public ResultVO insertCustomer(CustomerVO customerVO) {
         return customerService.insertCustomer(customerVO);
     }
 
     /**
-     * 거래처 수정
+     * 고객 수정
      * @param customerVO
      * @return
      */
     @PutMapping
+    @ApiOperation(value="고객 수정", notes="고객 수정")
     public ResultVO updateCustomer(CustomerVO customerVO) {
         return customerService.updateCustomer(customerVO);
     }

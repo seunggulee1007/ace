@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    @apiNote 출퇴근 매퍼
+    @author  es-seungglee
+ -->
+<mapper namespace="com.inno.ace.model.dao.ace.CommuteDao">
+
+    <select id="selectTodayWork" resultType="commuteVO">
+        select
+            commute_id as commuteId,
+            user_id as userId,
+            start_dtm as startDtm,
+            end_dtm as endDtm
+        from tb_commute
+        where
+            user_id = #{userId}
+            and DATE_FORMAT(start_dtm, '%Y%m%d') = DATE_FORMAT(NOW(), '%Y%m%d')
+    </select>
+
+    <insert id="startWork">
+        insert into tb_commute (
+            user_id
+            ,start_dtm
+        )values(
+            #{userId}
+            ,now()
+        )
+    </insert>
+
+    <update id="endWork">
+        update tb_commute
+            set
+                end_dtm = now()
+            where
+                commute_id = commute_id
+    </update>
+
+
+
+</mapper>
