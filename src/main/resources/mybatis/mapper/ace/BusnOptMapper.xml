@@ -4,10 +4,10 @@
     @apiNote 사업자 휴폐업 관련 매퍼
     @author  es-seungglee
  -->
-<mapper namespace="com.inno.ace.model.dao.ace.CodeDao">
+<mapper namespace="com.inno.ace.model.dao.ace.BusnOptDao">
 
     <select id="selectBusnOpt" resultType="busnOptVO">
-        
+
     </select>
 
     <insert id="insertBusnOpt" parameterType="busnOptVO">
