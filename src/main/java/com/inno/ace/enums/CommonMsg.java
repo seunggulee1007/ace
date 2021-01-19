@@ -24,6 +24,7 @@ public enum CommonMsg {
     SUCCESS_SYNC("동기화에 성공하였습니다."),
     DUPLE_AUTH_GROUP_NM("중복된 그룹 명이 있습니다."),
     AVAILABLE_AUTH_GROUP_NM("사용 가능한 그룹명 입니다."),
+    AVALIABLE_CLIENT("사용 가능한 거래처 명 입니다."),
     ;
     String msg;
     CommonMsg(String msg) {

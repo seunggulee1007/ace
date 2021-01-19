@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inno.ace.model.dao.ace.ClientDao">
+
+    <!-- 중복 체크 -->
+    <select id="confirmDuple" parameterType="String" resultType="int">
+        select
+            COUNT(*)
+        from tb_client
+        where
+            client_nm = #{clientNm}
+    </select>
+
+    <select id="selectClient" resultType="clientVO">
+        select
+            client_id                   as clientId,
+            client_nm                   as clientNm,
+            client_kind                 as clientKind,
+            fn_code_nm('clientKind', client_kind) as clientKindNm,
+            biz_no                      as bizNo,
+            biz_result_msg              as bizResultMsg,
+            biz_result_detail_msg       as bizResultDetailMsg,
+            biz_result_detail_eng_msg   as bizResultDetailEngMsg,
+            biz_result                  as bizResult,
+            ceo_nm                      as ceoNm,
+            co_reg_no                   as coRegNo,
+            biz_cond                    as bizCond,
+            fn_code_nm('bizCond', biz_cond) as bizCondNm,
+            biz_kind                    as bizKind,
+            fn_code_nm('bizKind', biz_kind) as bizKindNm,
+            contract_status             as contractStatus,
+            fn_code_nm('contractStatus', contract_status) as contractStatusNm,
+            post_no                     as postNo,
+            addr                        as addr,
+            addr_eng                    as addrEng,
+            addr_type                   as addrType,
+            addr_detail                 as addrDetail,
+            road_nm                     as roadNm,
+            road_nm_cd                  as roadNmCd,
+            bcode                       as bcode,
+            bname                       as bname,
+            building_cd                 as buildingCd,
+            building_nm                 as buildingNm,
+            sido                        as sido,
+            sigungu                     as sigungu,
+            sigungu_cd                  as sigunguCd,
+            tel_no                      as telNo,
+            manager                     as manager,
+            phone                       as phone,
+            email                       as email,
+            contract_amt                as contractAmt,
+            contract_date_from          as contractDateFrom,
+            contract_date_to            as contractDateTo,
+            domain_addr                 as domainAddr,
+            crt_id                      as crtId,
+            crt_dtm                     as crtDtm,
+            chg_id                      as chgId,
+            chg_dtm                     as chgDtm
+        from tb_client
+        where
+            client_id = #{clientId}
+    </select>
+
+    <select id="selectClientList" parameterType="pagingVO" resultType="clientVO">
+        select
+            client_id                   as clientId,
+            client_nm                   as clientNm,
+            client_kind                 as clientKind,
+            fn_code_nm('clientKind', client_kind) as clientKindNm,
+            biz_no                      as bizNo,
+            biz_result_msg              as bizResultMsg,
+            biz_result_detail_msg       as bizResultDetailMsg,
+            biz_result_detail_eng_msg   as bizResultDetailEngMsg,
+            biz_result                  as bizResult,
+            ceo_nm                      as ceoNm,
+            co_reg_no                   as coRegNo,
+            biz_cond                    as bizCond,
+            fn_code_nm('bizCond', biz_cond) as bizCondNm,
+            biz_kind                    as bizKind,
+            fn_code_nm('bizKind', biz_kind) as bizKindNm,
+            contract_status             as contractStatus,
+            fn_code_nm('contractStatus', contract_status) as contractStatusNm,
+            post_no                     as postNo,
+            addr                        as addr,
+            addr_eng                    as addrEng,
+            addr_type                   as addrType,
+            addr_detail                 as addrDetail,
+            road_nm                     as roadNm,
+            road_nm_cd                  as roadNmCd,
+            bcode                       as bcode,
+            bname                       as bname,
+            building_cd                 as buildingCd,
+            building_nm                 as buildingNm,
+            sido                        as sido,
+            sigungu                     as sigungu,
+            sigungu_cd                  as sigunguCd,
+            tel_no                      as telNo,
+            manager                     as manager,
+            phone                       as phone,
+            email                       as email,
+            contract_amt                as contractAmt,
+            contract_date_from          as contractDateFrom,
+            contract_date_to            as contractDateTo,
+            domain_addr                 as domainAddr,
+            crt_id                      as crtId,
+            crt_dtm                     as crtDtm,
+            chg_id                      as chgId,
+            chg_dtm                     as chgDtm
+        from tb_client
+        <where>
+            <if test="searchKeyword != null and searchKeyword != ''">
+                <choose>
+                    <when test="searchKind eq '1'.toString()">
+                        and client_nm like concat('%',#{searchKeyword}, '%')
+                    </when>
+                    <when test="searchKind eq '2'.toString()">
+                        and ceo_nm like concat('%', #{searchKeyword}, '%')
+                    </when>
+                    <otherwise>
+                        and biz_no like concat('%', #{searchKeyword}, '%')
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+        LIMIT #{pageNo}, #{listCnt}
+    </select>
+
+    <select id="selectClientCnt" parameterType="pagingVO" resultType="int">
+        select
+            count(*)
+        from tb_client
+        <where>
+            <if test="searchKeyword != null and searchKeyword != ''">
+                <choose>
+                    <when test="searchKind eq '1'.toString()">
+                        and client_nm like concat('%',#{searchKeyword}, '%')
+                    </when>
+                    <when test="searchKind eq '2'.toString()">
+                        and ceo_nm like concat('%', #{searchKeyword}, '%')
+                    </when>
+                    <otherwise>
+                        and biz_no like concat('%', #{searchKeyword}, '%')
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertClient" parameterType="clientVO">
+        insert into tb_client(
+            client_nm,
+            client_kind,
+            biz_no,
+            biz_result_msg,
+            biz_result_detail_msg,
+            biz_result_detail_eng_msg,
+            biz_result,
+            ceo_nm,
+            co_reg_no,
+            biz_cond,
+            biz_kind,
+            contract_status,
+            post_no,
+            addr,
+            addr_eng,
+            addr_type,
+            addr_detail,
+            road_nm,
+            road_nm_cd,
+            bcode,
+            bname,
+            building_cd,
+            building_nm,
+            sido,
+            sigungu,
+            sigungu_cd,
+            tel_no,
+            manager,
+            phone,
+            email,
+            contract_amt,
+            contract_date_from,
+            contract_date_to,
+            domain_addr,
+            crt_id,
+            crt_dtm
+        )values(
+            #{clientNm},
+            #{clientKind},
+            #{bizNo},
+            #{bizResultMsg},
+            #{bizResultDetailMsg},
+            #{bizResultDetailEngMsg},
+            #{bizResult},
+            #{ceoNm},
+            #{coRegNo},
+            #{bizCond},
+            #{bizKind},
+            #{contractStatus},
+            #{postNo},
+            #{addr},
+            #{addrEng},
+            #{addrType},
+            #{addrDetail},
+            #{roadNm},
+            #{roadNmCd},
+            #{bcode},
+            #{bname},
+            #{buildingCd},
+            #{buildingNm},
+            #{sido},
+            #{sigungu},
+            #{sigunguCd},
+            #{telNo},
+            #{manager},
+            #{phone},
+            #{email},
+            #{contractAmt},
+            #{contractDateFrom},
+            #{contractDateTo},
+            #{domainAddr},
+            #{crtId},
+            now()
+       )
+    </insert>
+
+    <update id="updateClient" parameterType="clientVO">
+        update tb_client
+            set
+                client_nm= #{clientNm},
+                client_kind= #{clientKind},
+                biz_no= #{bizNo},
+                biz_result_msg= #{bizResultMsg},
+                biz_result_detail_msg= #{bizResultDetailMsg},
+                biz_result_detail_eng_msg= #{bizResultDetailEngMsg},
+                biz_result= #{bizResult},
+                ceo_nm= #{ceoNm},
+                co_reg_no= #{coRegNo},
+                biz_cond= #{bizCond},
+                biz_kind= #{bizKind},
+                contract_status = #{contractStatus},
+                post_no= #{postNo},
+                addr= #{addr},
+                addr_eng= #{addrEng},
+                addr_type= #{addrType},
+                addr_detail= #{addrDetail},
+                road_nm = #{roadNm},
+                road_nm_cd= #{roadNmCd},
+                bcode= #{bcode},
+                bname= #{bname},
+                building_cd= #{buildingCd},
+                building_nm= #{buildingNm},
+                sido= #{sido},
+                sigungu= #{sigungu},
+                sigungu_cd= #{sigunguCd},
+                tel_no= #{telNo},
+                manager= #{manager},
+                phone= #{phone},
+                email= #{email},
+                contract_amt= #{contractAmt},
+                contract_date_from= #{contractDateFrom},
+                contract_date_to= #{contractDateTo},
+                domain_addr = #{domainAddr}
+            where
+                client_id = #{clientId}
+    </update>
+
+    <!-- 거래처 삭제 -->
+    <delete id="deleteClient">
+        delete from tb_client where client_id = #{clientId}
+    </delete>
+
+</mapper>
