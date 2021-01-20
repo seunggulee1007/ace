@@ -8,10 +8,13 @@ import java.util.Optional;
 @Mapper
 public interface CommuteDao {
 
+    /** 금일 근무 시간 가져오기 */
     Optional<CommuteVO> selectTodayWork(String userId);
 
+    /** 근무 시작 */
     int startWork(String userId);
 
+    /** 근무 종료 */
     int endWork(int commuteId);
 
 }

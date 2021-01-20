@@ -7,7 +7,20 @@
 <mapper namespace="com.inno.ace.model.dao.ace.BusnOptDao">
 
     <select id="selectBusnOpt" resultType="busnOptVO">
-
+        select
+            client_id as clientId
+            ,manager_id as managerId
+            ,busn_opt_nm as busnOptNm
+            ,busn_opt_dt as busnOptDt
+            ,info_source_cd as infoSourceCd
+            ,project_type_cd as projectTypeCd
+            ,area_cd as areaCd
+            ,success_percent_cd as successPercentCd
+            ,expect_sales_month as expectSalesMonth
+            ,expect_sales_amt as expectSalesAmt
+            ,crt_id as crtId
+            ,crt_dtm as crtDtm
+        from tb_busn_opt
     </select>
 
     <insert id="insertBusnOpt" parameterType="busnOptVO">
@@ -16,7 +29,7 @@
             ,manager_id
             ,busn_opt_nm
             ,busn_opt_dt
-            ,info_soucre_cd
+            ,info_source_cd
             ,project_type_cd
             ,area_cd
             ,success_percent_cd
@@ -47,12 +60,14 @@
                 ,manager_id = #{managerId}
                 ,busn_opt_nm = #{busnOptNm}
                 ,busn_opt_dt = #{busnOptDt}
-                ,info_soucre_cd = #{infoSourceCd}
+                ,info_source_cd = #{infoSourceCd}
                 ,project_type_cd = #{projectTypeCd}
                 ,area_cd = #{areacd}
                 ,success_percent_cd = #{successPercentCd}
                 ,expect_sales_month = #{expectSalesMonth}
                 ,expect_sales_amt = #{expectSalesAmt}
+            where
+                busn_opt_id = #{busnOptId}
     </update>
 
 
