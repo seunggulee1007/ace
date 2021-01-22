@@ -10,6 +10,6 @@ public class SmQryUnitVO {
     /** 금액 단위 */
     private String SMQryUnitName;
     /** 순서 */
-    private int SMQryUnitName;
+    // private int SMQryUnitName;
 
 }
