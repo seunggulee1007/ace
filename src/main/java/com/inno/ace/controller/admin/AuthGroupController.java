@@ -1,4 +1,4 @@
-package com.inno.ace.controller;
+package com.inno.ace.controller.admin;
 
 import com.inno.ace.model.service.admin.authgroup.AuthGroupService;
 import com.inno.ace.model.vo.admin.AuthGroupVO;

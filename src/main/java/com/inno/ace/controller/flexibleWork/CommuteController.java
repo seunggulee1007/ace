@@ -1,4 +1,4 @@
-package com.inno.ace.controller;
+package com.inno.ace.controller.flexibleWork;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;

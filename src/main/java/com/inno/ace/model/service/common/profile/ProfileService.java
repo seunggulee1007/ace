@@ -1,4 +1,4 @@
-package com.inno.ace.model.service.admin.profile;
+package com.inno.ace.model.service.common.profile;
 
 
 import com.inno.ace.model.vo.common.ProfileVO;

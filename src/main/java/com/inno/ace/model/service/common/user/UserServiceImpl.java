@@ -6,7 +6,7 @@ import com.inno.ace.advice.exception.NoMemberException;
 import com.inno.ace.config.JwtTokenProvider;
 import com.inno.ace.enums.CommonMsg;
 import com.inno.ace.model.dao.ace.common.UserDao;
-import com.inno.ace.model.service.admin.profile.ProfileService;
+import com.inno.ace.model.service.common.profile.ProfileService;
 import com.inno.ace.model.vo.admin.FileVO;
 import com.inno.ace.model.vo.common.ProfileVO;
 import com.inno.ace.model.vo.common.ResultVO;

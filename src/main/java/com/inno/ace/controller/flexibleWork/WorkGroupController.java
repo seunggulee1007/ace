@@ -1,4 +1,4 @@
-package com.inno.ace.controller;
+package com.inno.ace.controller.flexibleWork;
 
 import com.inno.ace.model.service.work.workgroup.WorkGroupService;
 import com.inno.ace.model.vo.common.PagingVO;

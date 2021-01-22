@@ -1,4 +1,4 @@
-package com.inno.ace.controller;
+package com.inno.ace.controller.common;
 
 import com.inno.ace.model.service.admin.codeMaster.CodeMasterService;
 import com.inno.ace.model.service.admin.menu.MenuService;

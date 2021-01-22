@@ -1,4 +1,4 @@
-package com.inno.ace.controller;
+package com.inno.ace.controller.common;
 
 import com.inno.ace.advice.exception.AlreadyMemberException;
 import com.inno.ace.model.service.common.user.UserService;

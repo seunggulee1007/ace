@@ -1,4 +1,4 @@
-package com.inno.ace.controller;
+package com.inno.ace.controller.common;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.inno.ace.controller;
+package com.inno.ace.controller.admin;
 
 import com.inno.ace.model.service.admin.dept.DeptService;
 import com.inno.ace.model.vo.admin.DeptVO;

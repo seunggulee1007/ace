@@ -1,4 +1,4 @@
-package com.inno.ace.controller;
+package com.inno.ace.controller.common;
 
 import com.inno.ace.advice.exception.CAuthenticationEntryPointException;
 import com.inno.ace.model.vo.common.ResultVO;

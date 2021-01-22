@@ -1,4 +1,4 @@
-package com.inno.ace.controller;
+package com.inno.ace.controller.common;
 
 import com.inno.ace.model.service.common.user.UserService;
 import com.inno.ace.model.vo.common.ResultVO;
