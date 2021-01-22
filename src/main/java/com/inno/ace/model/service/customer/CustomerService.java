@@ -1,8 +1,8 @@
 package com.inno.ace.model.service.customer;
 
-import com.inno.ace.model.vo.CustomerVO;
-import com.inno.ace.model.vo.PagingVO;
-import com.inno.ace.model.vo.ResultVO;
+import com.inno.ace.model.vo.admin.CustomerVO;
+import com.inno.ace.model.vo.common.PagingVO;
+import com.inno.ace.model.vo.common.ResultVO;
 
 public interface CustomerService {
 

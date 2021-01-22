@@ -1,6 +1,6 @@
 package com.inno.ace.util;
 
-import com.inno.ace.model.vo.FileVO;
+import com.inno.ace.model.vo.admin.FileVO;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;

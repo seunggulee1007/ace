@@ -1,9 +1,9 @@
 package com.inno.ace.model.service.work.workuser;
 
 import com.inno.ace.enums.CommonMsg;
-import com.inno.ace.model.dao.ace.WorkUserDao;
-import com.inno.ace.model.vo.ResultVO;
-import com.inno.ace.model.vo.work.WorkUserVO;
+import com.inno.ace.model.dao.ace.flexibleWork.WorkUserDao;
+import com.inno.ace.model.vo.common.ResultVO;
+import com.inno.ace.model.vo.flexibleWork.WorkUserVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

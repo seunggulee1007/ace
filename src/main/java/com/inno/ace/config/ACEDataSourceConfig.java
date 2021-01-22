@@ -48,7 +48,7 @@ public class ACEDataSourceConfig extends HikariConfig {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         
         sqlSessionFactory.setDataSource(dataSource);
-        sqlSessionFactory.setMapperLocations(context.getResources("classpath:mybatis/mapper/ace/*.xml"));
+        sqlSessionFactory.setMapperLocations(context.getResources("classpath:mybatis/mapper/ace/**/*.xml"));
         sqlSessionFactory.setConfigLocation(context.getResource("classpath:mybatis/Mybatis-config.xml"));
         
         return sqlSessionFactory.getObject();

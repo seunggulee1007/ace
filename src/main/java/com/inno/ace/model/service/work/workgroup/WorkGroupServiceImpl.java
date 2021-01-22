@@ -2,14 +2,14 @@ package com.inno.ace.model.service.work.workgroup;
 
 import com.inno.ace.advice.exception.DuplicationException;
 import com.inno.ace.enums.CommonMsg;
-import com.inno.ace.model.dao.ace.WorkGroupDao;
+import com.inno.ace.model.dao.ace.flexibleWork.WorkGroupDao;
 import com.inno.ace.model.service.work.workdept.WorkDeptService;
 import com.inno.ace.model.service.work.worktime.WorkTimeService;
 import com.inno.ace.model.service.work.workuser.WorkUserService;
 import com.inno.ace.model.service.work.workweek.WorkWeekService;
-import com.inno.ace.model.vo.PagingVO;
-import com.inno.ace.model.vo.ResultVO;
-import com.inno.ace.model.vo.work.*;
+import com.inno.ace.model.vo.common.PagingVO;
+import com.inno.ace.model.vo.common.ResultVO;
+import com.inno.ace.model.vo.flexibleWork.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

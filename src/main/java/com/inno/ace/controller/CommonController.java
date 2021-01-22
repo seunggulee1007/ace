@@ -1,8 +1,8 @@
 package com.inno.ace.controller;
 
-import com.inno.ace.model.service.code.CodeService;
-import com.inno.ace.model.service.menu.MenuService;
-import com.inno.ace.model.vo.ResultVO;
+import com.inno.ace.model.service.admin.code.CodeService;
+import com.inno.ace.model.service.admin.menu.MenuService;
+import com.inno.ace.model.vo.common.ResultVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

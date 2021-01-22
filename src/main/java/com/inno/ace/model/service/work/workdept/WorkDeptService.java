@@ -1,7 +1,7 @@
 package com.inno.ace.model.service.work.workdept;
 
-import com.inno.ace.model.vo.ResultVO;
-import com.inno.ace.model.vo.work.WorkDeptVO;
+import com.inno.ace.model.vo.common.ResultVO;
+import com.inno.ace.model.vo.flexibleWork.WorkDeptVO;
 
 public interface WorkDeptService {
 

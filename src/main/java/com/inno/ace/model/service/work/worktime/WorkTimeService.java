@@ -1,7 +1,7 @@
 package com.inno.ace.model.service.work.worktime;
 
-import com.inno.ace.model.vo.ResultVO;
-import com.inno.ace.model.vo.work.WorkTimeVO;
+import com.inno.ace.model.vo.common.ResultVO;
+import com.inno.ace.model.vo.flexibleWork.WorkTimeVO;
 
 public interface WorkTimeService {
 

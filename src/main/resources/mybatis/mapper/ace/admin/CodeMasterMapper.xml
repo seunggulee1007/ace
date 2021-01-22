@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+    @apiNote 사업자 휴폐업 관련 매퍼
+    @author  es-seungglee
+ -->
+<mapper namespace="com.inno.ace.model.dao.ace.admin.CodeMasterDao">
+    
+    <!-- 코드 마스터 조회 -->
+    <select id="selectCodeMasterList" resultType="codeMasterVO" parameterType="pagingVO">
+        select
+            code_master_id as codeMasterId,
+            code_master_nm as codeMasterNm,
+            use_yn as useYn,
+            crt_id as crtId,
+            crt_dtm as crtDtm,
+            chg_id as chgId,
+            chg_dtm as chgDtm
+        from tb_code_master
+        LIMIT {pageNo}, {listCnt}
+    </select>
+    
+    <!-- 코드 마스터 정보 등록 -->
+    <insert id="insertCodeMaster" parameterType="codeMasterVO">
+        insert into tb_code_master(
+            code_master_id,
+            code_master_nm,
+            crt_id,
+            crt_dtm
+        )values (
+            #{codeMasterId},
+            #{codeMasterNm},
+            #{crtId},
+            now()
+        )
+        on duplicate key
+        update
+            code_master_nm = #{codeMasterNm},
+            chg_dtm = now()
+    </insert>
+    
+    <!-- 코드 마스터 정보 수정 -->
+    <update id="updateCodeMaster" parameterType="codeMasterVO">
+        update tb_code_master
+            set
+                code_master_nm = #{codeMasterNm},
+                use_yn = #{useYn},
+                chg_id = #{chgId},
+                chg_dtm = now()
+            where
+                code_master_id= #{codeMasterId}
+    </update>
+    
+    <!-- 코드 마스터 삭제 -->
+    <delete id="deleteCodeMaster">
+        delete from tb_code_master
+        where
+            code_master_id = #{codeMasterId}
+    </delete>
+    
+</mapper>

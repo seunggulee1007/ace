@@ -1,7 +1,7 @@
 package com.inno.ace.controller;
 
 import com.inno.ace.advice.exception.CAuthenticationEntryPointException;
-import com.inno.ace.model.vo.ResultVO;
+import com.inno.ace.model.vo.common.ResultVO;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

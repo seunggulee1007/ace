@@ -1,9 +1,9 @@
 package com.inno.ace.controller;
 
-import com.inno.ace.model.service.codeMaster.CodeMasterService;
-import com.inno.ace.model.vo.CodeMasterVO;
-import com.inno.ace.model.vo.PagingVO;
-import com.inno.ace.model.vo.ResultVO;
+import com.inno.ace.model.service.admin.codeMaster.CodeMasterService;
+import com.inno.ace.model.vo.admin.CodeMasterVO;
+import com.inno.ace.model.vo.common.PagingVO;
+import com.inno.ace.model.vo.common.ResultVO;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

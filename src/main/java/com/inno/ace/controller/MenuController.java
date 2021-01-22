@@ -1,13 +1,9 @@
 package com.inno.ace.controller;
 
-import com.inno.ace.model.service.menu.MenuService;
-import com.inno.ace.model.vo.MenuVO;
-import com.inno.ace.model.vo.ResultVO;
-import io.swagger.annotations.ApiOperation;
+import com.inno.ace.model.service.admin.menu.MenuService;
+import com.inno.ace.model.vo.common.ResultVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor

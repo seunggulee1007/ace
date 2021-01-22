@@ -1,9 +1,9 @@
 package com.inno.ace.controller;
 
 import com.inno.ace.advice.exception.AlreadyMemberException;
-import com.inno.ace.model.service.user.UserService;
-import com.inno.ace.model.vo.ResultVO;
-import com.inno.ace.model.vo.UserVO;
+import com.inno.ace.model.service.common.user.UserService;
+import com.inno.ace.model.vo.common.ResultVO;
+import com.inno.ace.model.vo.common.UserVO;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

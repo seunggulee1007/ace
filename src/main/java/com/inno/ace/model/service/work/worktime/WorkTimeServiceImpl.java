@@ -1,9 +1,9 @@
 package com.inno.ace.model.service.work.worktime;
 
 import com.inno.ace.enums.CommonMsg;
-import com.inno.ace.model.dao.ace.WorkTimeDao;
-import com.inno.ace.model.vo.ResultVO;
-import com.inno.ace.model.vo.work.WorkTimeVO;
+import com.inno.ace.model.dao.ace.flexibleWork.WorkTimeDao;
+import com.inno.ace.model.vo.common.ResultVO;
+import com.inno.ace.model.vo.flexibleWork.WorkTimeVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -4,7 +4,7 @@
     @apiNote 출퇴근 매퍼
     @author  es-seungglee
  -->
-<mapper namespace="com.inno.ace.model.dao.ace.CommuteDao">
+<mapper namespace="com.inno.ace.model.dao.ace.flexibleWork.CommuteDao">
 
     <select id="selectTodayWork" resultType="commuteVO">
         select

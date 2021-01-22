@@ -1,7 +1,7 @@
 package com.inno.ace.controller;
 
-import com.inno.ace.model.service.biz.BizService;
-import com.inno.ace.model.vo.ResultVO;
+import com.inno.ace.model.service.admin.biz.BizService;
+import com.inno.ace.model.vo.common.ResultVO;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;

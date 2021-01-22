@@ -1,8 +1,8 @@
 package com.inno.ace.model.service.work.workgroup;
 
-import com.inno.ace.model.vo.PagingVO;
-import com.inno.ace.model.vo.ResultVO;
-import com.inno.ace.model.vo.work.WorkGroupVO;
+import com.inno.ace.model.vo.common.PagingVO;
+import com.inno.ace.model.vo.common.ResultVO;
+import com.inno.ace.model.vo.flexibleWork.WorkGroupVO;
 
 public interface WorkGroupService {
 

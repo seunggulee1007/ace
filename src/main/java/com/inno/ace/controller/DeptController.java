@@ -1,8 +1,8 @@
 package com.inno.ace.controller;
 
-import com.inno.ace.model.service.dept.DeptService;
-import com.inno.ace.model.vo.DeptVO;
-import com.inno.ace.model.vo.ResultVO;
+import com.inno.ace.model.service.admin.dept.DeptService;
+import com.inno.ace.model.vo.admin.DeptVO;
+import com.inno.ace.model.vo.common.ResultVO;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

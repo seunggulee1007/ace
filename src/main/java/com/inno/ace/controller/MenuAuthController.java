@@ -1,8 +1,8 @@
 package com.inno.ace.controller;
 
-import com.inno.ace.model.service.menuauth.MenuAuthService;
-import com.inno.ace.model.vo.MenuAuthVO;
-import com.inno.ace.model.vo.ResultVO;
+import com.inno.ace.model.service.admin.menuauth.MenuAuthService;
+import com.inno.ace.model.vo.admin.MenuAuthVO;
+import com.inno.ace.model.vo.common.ResultVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;

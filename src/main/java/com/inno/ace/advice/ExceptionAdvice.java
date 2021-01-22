@@ -3,7 +3,7 @@ package com.inno.ace.advice;
 import com.inno.ace.advice.exception.*;
 import com.inno.ace.enums.CommonCode;
 import com.inno.ace.enums.CommonMsg;
-import com.inno.ace.model.vo.ResultVO;
+import com.inno.ace.model.vo.common.ResultVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;

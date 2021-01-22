@@ -1,9 +1,9 @@
 package com.inno.ace.controller;
 
 import com.inno.ace.model.service.work.workgroup.WorkGroupService;
-import com.inno.ace.model.vo.PagingVO;
-import com.inno.ace.model.vo.ResultVO;
-import com.inno.ace.model.vo.work.WorkGroupVO;
+import com.inno.ace.model.vo.common.PagingVO;
+import com.inno.ace.model.vo.common.ResultVO;
+import com.inno.ace.model.vo.flexibleWork.WorkGroupVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

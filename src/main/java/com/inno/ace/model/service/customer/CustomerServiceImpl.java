@@ -2,12 +2,10 @@ package com.inno.ace.model.service.customer;
 
 import com.inno.ace.advice.exception.DuplicationException;
 import com.inno.ace.enums.CommonMsg;
-import com.inno.ace.model.dao.ace.ClientDao;
-import com.inno.ace.model.dao.ace.CustomerDao;
-import com.inno.ace.model.vo.ClientVO;
-import com.inno.ace.model.vo.CustomerVO;
-import com.inno.ace.model.vo.PagingVO;
-import com.inno.ace.model.vo.ResultVO;
+import com.inno.ace.model.dao.ace.flexibleWork.CustomerDao;
+import com.inno.ace.model.vo.admin.CustomerVO;
+import com.inno.ace.model.vo.common.PagingVO;
+import com.inno.ace.model.vo.common.ResultVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

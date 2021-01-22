@@ -1,6 +1,6 @@
 package com.inno.ace.model.vo.busn;
 
-import com.inno.ace.model.vo.CommonVO;
+import com.inno.ace.model.vo.common.CommonVO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

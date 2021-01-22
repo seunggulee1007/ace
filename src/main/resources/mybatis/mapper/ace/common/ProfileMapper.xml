@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    @apiNote 파일 매퍼
+    @author  es-seungglee
+ -->
+<mapper namespace="com.inno.ace.model.dao.ace.common.ProfileDao">
+
+    <!-- 파일 등록 -->
+    <insert id="insertProfile" parameterType="profileVO">
+
+        insert into tb_profile(
+            file_nm
+            ,original_file_nm
+            ,file_path
+            ,content_type
+            ,extention
+            ,file_size
+            ,user_id
+        )values(
+            #{fileNm}
+            ,#{originalFileNm}
+            ,#{filePath}
+            ,#{contentType}
+            ,#{extention}
+            ,#{fileSize}
+            ,#{userId}
+        )
+    </insert>
+
+    <!-- 파일 단건 조회 -->
+    <select id="selectFile" resultType="fileVO">
+        select
+            profile_id             as profileId
+            ,file_nm                as fileNm
+            ,original_file_nm       as originalFileNm
+            ,file_path              as filePath
+            ,content_type           as contentType
+            ,extention              as extention
+            ,file_size              as fileSize
+            ,user_id                as userId
+        from tb_profile
+        where
+            profile_id = #{profileId}
+    </select>
+
+    <!-- 파일 삭제 -->
+    <delete id="deleteFileByFileId">
+        delete from tb_profile
+        where
+            profile_id = #{profileId}
+    </delete>
+
+    <delete id="deleteProfileByUserId">
+        delete from tb_profile
+        where
+            user_id = #{userId}
+    </delete>
+
+</mapper>

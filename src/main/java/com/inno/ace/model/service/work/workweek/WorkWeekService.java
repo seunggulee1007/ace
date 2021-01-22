@@ -1,7 +1,7 @@
 package com.inno.ace.model.service.work.workweek;
 
-import com.inno.ace.model.vo.ResultVO;
-import com.inno.ace.model.vo.work.WorkWeekVO;
+import com.inno.ace.model.vo.common.ResultVO;
+import com.inno.ace.model.vo.flexibleWork.WorkWeekVO;
 
 public interface WorkWeekService {
 

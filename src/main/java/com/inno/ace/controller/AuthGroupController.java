@@ -1,8 +1,8 @@
 package com.inno.ace.controller;
 
-import com.inno.ace.model.service.authgroup.AuthGroupService;
-import com.inno.ace.model.vo.AuthGroupVO;
-import com.inno.ace.model.vo.ResultVO;
+import com.inno.ace.model.service.admin.authgroup.AuthGroupService;
+import com.inno.ace.model.vo.admin.AuthGroupVO;
+import com.inno.ace.model.vo.common.ResultVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

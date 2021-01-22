@@ -1,7 +1,7 @@
 package com.inno.ace.model.service.work.workuser;
 
-import com.inno.ace.model.vo.ResultVO;
-import com.inno.ace.model.vo.work.WorkUserVO;
+import com.inno.ace.model.vo.common.ResultVO;
+import com.inno.ace.model.vo.flexibleWork.WorkUserVO;
 
 public interface WorkUserService {
 
