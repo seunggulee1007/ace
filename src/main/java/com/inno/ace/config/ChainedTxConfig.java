@@ -17,8 +17,8 @@ public class ChainedTxConfig {
  
     @Bean
     @Primary
-    public PlatformTransactionManager transactionManager(PlatformTransactionManager rwsTransction) {
-        return new ChainedTransactionManager(rwsTransction);
+    public PlatformTransactionManager transactionManager(PlatformTransactionManager aceTransactionManager, PlatformTransactionManager erpTransactionManager) {
+        return new ChainedTransactionManager(aceTransactionManager, erpTransactionManager);
     }
     
 }

@@ -11,7 +11,14 @@ spring:
         password: aceepdlxjqpdltm1!
         driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
         # driver-class-name: org.mariadb.jdbc.Driver
-        pool-name: default-r-pool
+        pool-name: default-ace-pool
+      erp:
+        jdbc-url: jdbc:sqlserver://218.38.121.71:1433;DatabaseName=INNODEV
+        username: webeis
+        password: Ini209##@@
+        driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+        # driver-class-name: org.mariadb.jdbc.Driver
+        pool-name: default-erp-pool
   devtools:
     livereload:
       enabled: true
